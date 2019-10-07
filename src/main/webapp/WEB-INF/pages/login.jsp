@@ -37,7 +37,7 @@
   <link href="../assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="profile-page sidebar-collapse">
+<body class="login-page sidebar-collapse">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container">
@@ -99,117 +99,55 @@
     </div>
   </nav>
   <!-- End Navbar -->
-  <div class="wrapper">
-    <div class="page-header clear-filter page-header-small" filter-color="orange">
-      <div class="page-header-image" data-parallax="true" style="background-image:url('../assets/img/bg5.jpg');">
-      </div>
+  <div class="page-header clear-filter" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(../assets/img/login.jpg)"></div>
+    <div class="content">
       <div class="container">
-        <div class="photo-container">
-          <img src="../assets/img/ryan.jpg" alt="">
-        </div>
-        <h3 class="title">Ryan Scheinder</h3>
-        <p class="category">Photographer</p>
-        <div class="content">
-          <div class="social-description">
-            <h2>26</h2>
-            <p>Comments</p>
-          </div>
-          <div class="social-description">
-            <h2>26</h2>
-            <p>Comments</p>
-          </div>
-          <div class="social-description">
-            <h2>48</h2>
-            <p>Bookmarks</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="button-container">
-          <a href="#button" class="btn btn-primary btn-round btn-lg">Follow</a>
-          <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-        <h3 class="title">About me</h3>
-        <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</h5>
-        <div class="row">
-          <div class="col-md-6 ml-auto mr-auto">
-            <h4 class="title text-center">My Portfolio</h4>
-            <div class="nav-align-center">
-              <ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#profile" role="tablist">
-                    <i class="now-ui-icons design_image"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#home" role="tablist">
-                    <i class="now-ui-icons location_world"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#messages" role="tablist">
-                    <i class="now-ui-icons sport_user-run"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- Tab panes -->
-          <div class="tab-content gallery">
-            <div class="tab-pane active" id="home" role="tabpanel">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg1.jpg" alt="" class="img-raised">
-                    <img src="../assets/img/bg3.jpg" alt="" class="img-raised">
-                  </div>
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg8.jpg" alt="" class="img-raised">
-                    <img src="../assets/img/bg7.jpg" alt="" class="img-raised">
-                  </div>
+        <div class="col-md-4 ml-auto mr-auto">
+          <div class="card card-login card-plain">
+            <form class="form" method="" action="">
+              <div class="card-header text-center">
+                <div class="logo-container">
+                  <img src="../assets/img/now-logo.png" alt="">
                 </div>
               </div>
-            </div>
-            <div class="tab-pane" id="profile" role="tabpanel">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg6.jpg" class="img-raised">
-                    <img src="../assets/img/bg11.jpg" alt="" class="img-raised">
+              <div class="card-body">
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons users_circle-08"></i>
+                    </span>
                   </div>
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg7.jpg" alt="" class="img-raised">
-                    <img src="../assets/img/bg8.jpg" alt="" class="img-raised">
+                  <input type="text" class="form-control" placeholder="First Name...">
+                </div>
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons text_caps-small"></i>
+                    </span>
                   </div>
+                  <input type="text" placeholder="Last Name..." class="form-control" />
                 </div>
               </div>
-            </div>
-            <div class="tab-pane" id="messages" role="tabpanel">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg3.jpg" alt="" class="img-raised">
-                    <img src="../assets/img/bg8.jpg" alt="" class="img-raised">
-                  </div>
-                  <div class="col-md-6">
-                    <img src="../assets/img/bg7.jpg" alt="" class="img-raised">
-                    <img src="../assets/img/bg6.jpg" class="img-raised">
-                  </div>
+              <div class="card-footer text-center">
+                <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
+                <div class="pull-left">
+                  <h6>
+                    <a href="#pablo" class="link">Create Account</a>
+                  </h6>
                 </div>
-              </div>
+                <div class="pull-right">
+                  <h6>
+                    <a href="#pablo" class="link">Need Help?</a>
+                  </h6>
+                </div>
+            </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <footer class="footer footer-default">
+    <footer class="footer">
       <div class=" container ">
         <nav>
           <ul>
