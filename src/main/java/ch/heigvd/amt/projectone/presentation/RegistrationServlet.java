@@ -1,4 +1,4 @@
-package ch.heigvd.amt.livecoding.presentation;
+package ch.heigvd.amt.projectone.presentation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

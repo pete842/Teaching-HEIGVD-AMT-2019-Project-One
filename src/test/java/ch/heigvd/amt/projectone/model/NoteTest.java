@@ -1,4 +1,4 @@
-package ch.heigvd.amt.livecoding.model;
+package ch.heigvd.amt.projectone.model;
 
 import org.junit.jupiter.api.Test;
 
