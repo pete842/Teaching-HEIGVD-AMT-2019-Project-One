@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 import lombok.Builder;
@@ -9,10 +10,10 @@ import lombok.Getter;
 @Builder
 @Getter
 @EqualsAndHashCode
-public class User {
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Date memberSince;
+public class Media {
+    private String title;
+    private Date release;
+    private Time duration;
+    private String mainGenre;
+    private Float rating;
 }
