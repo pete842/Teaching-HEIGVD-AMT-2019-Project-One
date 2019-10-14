@@ -1,4 +1,3 @@
-drop database libmovie;
 create database if not exists libmovie;
 use libmovie;
 
