@@ -1,6 +1,6 @@
-package ch.heigvd.amt.projectone.model;
+package ch.heigvd.amt.projectone.model.entities;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -10,9 +10,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class User {
+    private long id;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private Date memberSince;
+    private Timestamp memberSince;
 }

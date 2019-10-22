@@ -1,8 +1,8 @@
-package ch.heigvd.amt.projectone.model;
+package ch.heigvd.amt.projectone.model.entities;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,10 +15,10 @@ class UserTest {
                 .firstName("Jonathan")
                 .lastName("Zaehringer")
                 .email("jonathan.zaehringer@gmail.com")
-                .memberSince(new Date())
+                .memberSince(new Timestamp(0))
                 .build();
 
-        assertNull(jzaehrin);
+        assertNotNull(jzaehrin);
         assertEquals("jzaehrin", jzaehrin.getUsername());
     }
 }

@@ -1,5 +1,6 @@
-package ch.heigvd.amt.projectone.model;
+package ch.heigvd.amt.projectone.model.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.Builder;
@@ -10,8 +11,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class MediaUser {
+    private long id;
     private User user;
     private Media media;
-    private Float rating;
-    private Date watched;
+    private Integer rating;
+    private Timestamp watched;
 }

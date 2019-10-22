@@ -1,7 +1,6 @@
-package ch.heigvd.amt.projectone.model;
+package ch.heigvd.amt.projectone.model.entities;
 
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,9 +10,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Media {
+    private long id;
     private String title;
-    private Date release;
-    private Time duration;
+    private Timestamp release;
+    private Integer duration;
     private String mainGenre;
-    private Float rating;
+    private Integer rating;
 }
