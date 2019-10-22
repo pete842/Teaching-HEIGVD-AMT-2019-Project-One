@@ -23,11 +23,13 @@ public class MediaUserDAO implements MediaUserDAOLocal {
     private DataSource dataSource;
 
     @Override
-    public List<MediaUser> findAll() {
+    public List<MediaUser> findAllByUser(Integer userId) {
         List<MediaUser> result = new LinkedList<>();
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id WHERE user_id = ?");
+            ps.setInt(1, userId);
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 result.add(SQLExtractor.extractMediaUser(rs));

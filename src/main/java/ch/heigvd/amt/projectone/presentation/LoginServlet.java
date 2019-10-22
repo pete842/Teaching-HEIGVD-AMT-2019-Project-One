@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     userDAO.findAll();
     mediaDAO.findAll();
-    mediaUserDAO.findAll();
+    mediaUserDAO.findAllByUser(2);
 
     req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
   }

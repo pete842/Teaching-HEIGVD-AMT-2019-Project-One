@@ -7,5 +7,5 @@ import java.util.List;
 
 @Local
 public interface MediaUserDAOLocal {
-    public List<MediaUser> findAll();
+    public List<MediaUser> findAllByUser(Integer userId);
 }
