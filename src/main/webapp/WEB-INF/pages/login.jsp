@@ -95,10 +95,10 @@
                 </div>
               </div>
               <div class="card-footer text-center">
-                <a href="login" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
+                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Get Started</button>
                 <div class="pull-left">
                   <h6>
-                    <button type="submit" class="btn btn-default">Create Account</button>
+                    <a href="registration" class="link">Create Account</a>
                   </h6>
                 </div>
             </form>
