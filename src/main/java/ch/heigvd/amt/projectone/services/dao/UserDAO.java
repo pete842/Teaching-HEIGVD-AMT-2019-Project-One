@@ -25,7 +25,7 @@ public class UserDAO implements UserDAOLocal {
         List<User> result = new LinkedList<>();
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Users");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 result.add(SQLExtractor.extractUser(rs));
