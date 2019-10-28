@@ -1,9 +1,7 @@
 package ch.heigvd.amt.projectone.presentation;
 
-import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.MediaDAOLocal;
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
-import ch.heigvd.amt.projectone.services.dao.UserDAO;
 import ch.heigvd.amt.projectone.services.dao.UserDAOLocal;
 
 import javax.ejb.EJB;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {

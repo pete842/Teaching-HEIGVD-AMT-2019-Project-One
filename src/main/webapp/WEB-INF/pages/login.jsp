@@ -43,8 +43,28 @@
 </head>
 
 <body class="login-page sidebar-collapse">
-  <!-- End Navbar -->
   <div class="page-header clear-filter" filter-color="orange">
+    <%
+      String error = (String)request.getAttribute("error");
+
+      if(error != null) {
+    %>
+    <div class="alert alert-danger" role="alert">
+      <div class="container">
+        <div class="alert-icon">
+          <i class="now-ui-icons objects_support-17"></i>
+        </div>
+        <strong>Oh snap!</strong> <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">
+                <i class="now-ui-icons ui-1_simple-remove"></i>
+              </span>
+        </button>
+      </div>
+    </div>
+    <%
+      }
+    %>
     <div class="page-header-image" style="background-image:url(./assets/img/login.jpg)"></div>
     <div class="content">
       <div class="container">
@@ -87,6 +107,7 @@
         </div>
       </div>
     </div>
+
   <%@include  file="footer.jsp" %>
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
