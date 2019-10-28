@@ -70,7 +70,7 @@
       <div class="container">
         <div class="col-md-4 ml-auto mr-auto">
           <div class="card card-login card-plain">
-            <form class="form" method="post" action="login">
+            <form class="form" method="POST" action="login">
               <div class="card-header text-center">
                 <div class="logo-container">
                   <img src="./assets/img/now-logo.png" alt="">
@@ -98,7 +98,7 @@
                 <a href="login" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
                 <div class="pull-left">
                   <h6>
-                    <a href="registration" class="link">Create Account</a>
+                    <button type="submit" class="btn btn-default">Create Account</button>
                   </h6>
                 </div>
             </form>
