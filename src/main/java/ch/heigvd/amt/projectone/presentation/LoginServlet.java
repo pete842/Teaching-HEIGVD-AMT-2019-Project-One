@@ -26,16 +26,18 @@ public class LoginServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
 
-    if (username == null && password == null) {
+    if (username == null || password == null) {
       req.setAttribute("error", "Missing Parameter");
 
       req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+      return;
     }
 
-    if (username.equals("") && password.equals("")) {
+    if (username.equals("") || password.equals("")) {
       req.setAttribute("error", "Missing Required parameter");
 
       req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+      return;
     }
 
     User user = userDAO.getUserByUsername(username);
@@ -43,6 +45,7 @@ public class LoginServlet extends HttpServlet {
       req.setAttribute("error", "Wrong username or password");
 
       req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+      return;
     }
 
     req.getSession().setAttribute("user_id", user.getId());

@@ -40,6 +40,7 @@ public class RegistrationServlet extends HttpServlet {
       req.setAttribute("lastname", lastname);
 
       req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+      return;
     }
 
     if (username.equals("") || password.equals("") || passwordConfirme.equals("") ||
@@ -51,6 +52,7 @@ public class RegistrationServlet extends HttpServlet {
       req.setAttribute("lastname", lastname);
 
       req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+      return;
     }
 
     if (! password.equals(passwordConfirme)) {
@@ -61,6 +63,7 @@ public class RegistrationServlet extends HttpServlet {
       req.setAttribute("lastname", lastname);
 
       req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+      return;
     }
 
     User user = User.builder()

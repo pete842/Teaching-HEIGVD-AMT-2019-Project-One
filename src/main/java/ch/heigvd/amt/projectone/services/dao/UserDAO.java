@@ -26,7 +26,9 @@ public class UserDAO implements UserDAOLocal {
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM users");
+
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 result.add(SQLExtractor.extractUser(rs));
             }
@@ -36,17 +38,21 @@ public class UserDAO implements UserDAOLocal {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return result;
     }
 
     @Override
     public User getUserByUsername(String username) {
         User result = null;
+
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE username = ?");
             ps.setString(1, username);
+
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 result = SQLExtractor.extractUser(rs);
             }
@@ -56,6 +62,7 @@ public class UserDAO implements UserDAOLocal {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return result;
     }
 
