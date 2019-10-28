@@ -10,18 +10,27 @@ import java.sql.Wrapper;
 
 public class SQLExtractor {
     public static User extractUser(ResultSet rs) throws SQLException {
+        return extractUser(rs, false);
+    }
+
+    public static User extractUser(ResultSet rs, boolean joined) throws SQLException {
         return User.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getLong((joined)? "user_id": "id"))
                 .username(rs.getString("username"))
                 .lastName(rs.getString("lastname"))
                 .firstName(rs.getString("firstname"))
                 .email(rs.getString("email"))
+                .password(rs.getString("password"))
                 .memberSince(rs.getTimestamp("member_since")).build();
     }
 
     public static Media extractMedia(ResultSet rs) throws SQLException {
+        return extractMedia(rs, false);
+    }
+
+    public static Media extractMedia(ResultSet rs, boolean joined) throws SQLException {
         return Media.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getLong((joined)? "media_id": "id"))
                 .title(rs.getString("title"))
                 .release(rs.getTimestamp("release"))
                 .duration(rs.getInt("duration"))
@@ -31,9 +40,9 @@ public class SQLExtractor {
 
     public static MediaUser extractMediaUser(ResultSet rs) throws SQLException {
         return MediaUser.builder()
-                .id(rs.getLong("user_id"))
-                .user(extractUser(rs))
-                .media(extractMedia(rs))
+                .id(rs.getLong("id"))
+                .user(extractUser(rs, true))
+                .media(extractMedia(rs, true))
                 .rating(rs.getInt("rating"))
                 .watched(rs.getTimestamp("watched")).build();
     }

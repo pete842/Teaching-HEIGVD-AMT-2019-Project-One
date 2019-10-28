@@ -38,4 +38,53 @@ public class UserDAO implements UserDAOLocal {
         }
         return result;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        User result = null;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result = SQLExtractor.extractUser(rs);
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public User create(User user) throws SQLException {
+        User result = null;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT users (username, password, email, firstname, lastname) value (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getFirstName());
+            ps.setString(5, user.getLastName());
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if(rs.next())
+            {
+                result = user.toBuilder().id(rs.getInt(1)).build();
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+
+        return result;
+    }
 }

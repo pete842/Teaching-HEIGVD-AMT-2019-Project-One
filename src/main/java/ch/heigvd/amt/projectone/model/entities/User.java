@@ -5,8 +5,9 @@ import java.sql.Timestamp;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
-@Builder
+@Builder(toBuilder=true)
 @Getter
 @EqualsAndHashCode
 public class User {
@@ -15,5 +16,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     private Timestamp memberSince;
 }
