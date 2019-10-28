@@ -63,7 +63,7 @@
                       <i class="now-ui-icons users_circle-08"></i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="First Name...">
+                  <input type="text" class="form-control" placeholder="User Name...">
                 </div>
                 <div class="input-group no-border input-lg">
                   <div class="input-group-prepend">
@@ -73,21 +73,46 @@
                   </div>
                   <input type="password" placeholder="Password..." class="form-control" />
                 </div>
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons objects_key-25"></i>
+                    </span>
+                  </div>
+                  <input type="password" placeholder="Confirm Password..." class="form-control" />
+                </div>
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="First Name...">
+                </div>
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Last Name...">
+                </div>
+                <div class="input-group no-border input-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Email Address...">
+                </div>
               </div>
               <div class="card-footer text-center">
-                <a href="login" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
-                <div class="pull-left">
-                  <h6>
-                    <a href="registration" class="link">Create Account</a>
-                  </h6>
-                </div>
+                <a href="registration" class="btn btn-primary btn-round btn-lg btn-block">Create Account</a>
             </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  <%@include  file="footer.jsp" %>
+    <%@include  file="footer.jsp" %>
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
   <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -98,8 +123,6 @@
   <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
   <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
 </body>
