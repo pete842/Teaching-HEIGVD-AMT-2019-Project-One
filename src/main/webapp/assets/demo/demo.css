@@ -1,9 +1,7 @@
-.tim-row {
-  margin-bottom: 20px;
-}
-
-.tim-white-buttons {
-  background-color: #777777;
+.alert {
+  position: absolute;
+  top:0;
+  width: 100%;
 }
 
 .typography-line {

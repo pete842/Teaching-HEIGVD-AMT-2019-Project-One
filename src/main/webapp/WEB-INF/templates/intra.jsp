@@ -19,11 +19,17 @@
     <!-- CSS Files -->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/demo/demo.css" rel="stylesheet" />
 </head>
-<body class="landing-page sidebar-collapse">
+<body class="landing-page profile-page sidebar-collapse">
 <div class="wrapper">
     <jsp:include page="/WEB-INF/components/navbar.jsp"/>
-    <jsp:include page="/WEB-INF/components/header.jsp"/>
+
+    <c:if test="${error ne null and not empty error}">
+        <jsp:include page="/WEB-INF/components/error-toast.jsp">
+            <jsp:param name="error" value="${error}"/>
+        </jsp:include>
+    </c:if>
 
     <jsp:include page="/WEB-INF/contents/${param.content}.jsp"/>
 
@@ -39,8 +45,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
 <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
 <script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="${pageContext.request.contextPath}/assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
 </body>

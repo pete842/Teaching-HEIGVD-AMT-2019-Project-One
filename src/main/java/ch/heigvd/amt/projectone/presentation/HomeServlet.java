@@ -10,8 +10,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/home")
 public class HomeServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
-  }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long user_id = (Long) req.getSession().getAttribute("user_id");
+
+        req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+    }
 }

@@ -19,37 +19,18 @@
     <!-- CSS Files -->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="${pageContext.request.contextPath}/assets/demo/demo.css" rel="stylesheet" />
-
-
 </head>
 <body class="login-page sidebar-collapse">
 <div id="wrapper">
-        <%
-            String error = (String) request.getAttribute("error");
-
-            if (error != null) {
-        %>
-    <div class="alert alert-danger" role="alert">
-        <div class="container">
-            <div class="alert-icon">
-                <i class="now-ui-icons objects_support-17"></i>
-            </div>
-            <strong>Oh snap!</strong> <%= error %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">
-                <i class="now-ui-icons ui-1_simple-remove"></i>
-              </span>
-            </button>
-        </div>
-    </div>
-        <%
-            }
-        %>
     <div class="login-page sidebar-collapse">
         <div class="page-header clear-filter" filter-color="orange">
-            <div class="page-header-image" style="background-image:url(./assets/img/login.jpg)"></div>
+            <div class="page-header-image" style="background-image:url('${pageContext.request.contextPath}/assets/img/login.jpg')"></div>
+            <c:if test="${error ne null and not empty error}">
+                <jsp:include page="/WEB-INF/components/error-toast.jsp">
+                    <jsp:param name="error" value="${error}"/>
+                </jsp:include>
+            </c:if>
             <div class="content">
                 <jsp:include page="/WEB-INF/contents/${param.content}.jsp"/>
             </div>
