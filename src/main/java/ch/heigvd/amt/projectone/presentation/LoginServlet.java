@@ -6,13 +6,15 @@ import ch.heigvd.amt.projectone.services.dao.UserDAOLocal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BaseHttpServlet {
+  private final static String[] postParamsToReturn = new String[]{"username"};
+  private final static String[] postMandatoryParams = new String[]{"username", "password"};
+
   @EJB
   private UserDAOLocal userDAO;
 
@@ -23,30 +25,17 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    if (!checkMandatoryParameters(req, resp, postMandatoryParams, "/WEB-INF/pages/login.jsp", postParamsToReturn)) return;
+
     String username = req.getParameter("username");
     String password = req.getParameter("password");
 
-    if (username == null || password == null) {
-      req.setAttribute("error", "Missing Parameter");
-
-      req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
-      return;
-    }
-
-    if (username.equals("") || password.equals("")) {
-      req.setAttribute("error", "Missing Required parameter");
-      req.setAttribute("username", username);
-
-      req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
-      return;
-    }
 
     User user = userDAO.getUserByUsername(username);
     if (user == null || !user.getPassword().equals(password)) {
       req.setAttribute("error", "Wrong username or password");
-      req.setAttribute("username", username);
+      responseToFailure(req, resp, postParamsToReturn, "/WEB-INF/pages/login.jsp");
 
-      req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
       return;
     }
 
