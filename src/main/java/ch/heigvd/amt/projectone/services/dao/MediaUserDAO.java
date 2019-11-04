@@ -1,8 +1,6 @@
 package ch.heigvd.amt.projectone.services.dao;
 
-import ch.heigvd.amt.projectone.model.entities.Media;
 import ch.heigvd.amt.projectone.model.entities.MediaUser;
-import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.extractor.SQLExtractor;
 
 import javax.annotation.Resource;
@@ -27,11 +25,10 @@ public class MediaUserDAO implements MediaUserDAOLocal {
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT * FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id WHERE user_id = ? AND watched ? NULL OFFSET ? LIMIT ?");
+                    "SELECT * FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id WHERE user_id = ? AND watched " + ((watched)? "IS NOT" : "IS") + " NULL LIMIT ? OFFSET ?");
             ps.setInt(1, userId);
-            ps.setString(2, (watched)? "!=" : "=");
+            ps.setInt(2, pageSize);
             ps.setInt(3, pageNumber * pageSize);
-            ps.setInt(4, pageSize);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -52,9 +49,8 @@ public class MediaUserDAO implements MediaUserDAOLocal {
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT count(*) FROM media_user WHERE user_id = ? AND watched ? NULL");
+                    "SELECT count(*) FROM media_user WHERE user_id = ? AND watched " + ((watched)? "IS NOT" : "IS") + " NULL");
             ps.setInt(1, userId);
-            ps.setString(2, (watched)? "!=" : "=");
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

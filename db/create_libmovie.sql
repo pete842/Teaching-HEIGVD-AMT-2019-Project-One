@@ -38,6 +38,3 @@ create table if not exists `media_user`
 		foreign key (`media_id`) references `medias`(`id`)
 	);
 
-
-        
-        

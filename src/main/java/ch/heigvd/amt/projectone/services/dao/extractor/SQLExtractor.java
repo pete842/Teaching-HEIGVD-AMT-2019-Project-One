@@ -6,7 +6,6 @@ import ch.heigvd.amt.projectone.model.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Wrapper;
 
 public class SQLExtractor {
     public static User extractUser(ResultSet rs) throws SQLException {
@@ -15,7 +14,7 @@ public class SQLExtractor {
 
     public static User extractUser(ResultSet rs, boolean joined) throws SQLException {
         return User.builder()
-                .id(rs.getLong((joined)? "user_id": "id"))
+                .id(rs.getInt((joined)? "user_id": "id"))
                 .username(rs.getString("username"))
                 .lastName(rs.getString("lastname"))
                 .firstName(rs.getString("firstname"))
@@ -30,7 +29,7 @@ public class SQLExtractor {
 
     public static Media extractMedia(ResultSet rs, boolean joined) throws SQLException {
         return Media.builder()
-                .id(rs.getLong((joined)? "media_id": "id"))
+                .id(rs.getInt((joined)? "media_id": "id"))
                 .title(rs.getString("title"))
                 .release(rs.getTimestamp("release"))
                 .duration(rs.getInt("duration"))
@@ -40,7 +39,7 @@ public class SQLExtractor {
 
     public static MediaUser extractMediaUser(ResultSet rs) throws SQLException {
         return MediaUser.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getInt("id"))
                 .user(extractUser(rs, true))
                 .media(extractMedia(rs, true))
                 .rating(rs.getInt("rating"))

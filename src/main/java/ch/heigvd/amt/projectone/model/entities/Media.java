@@ -1,10 +1,10 @@
 package ch.heigvd.amt.projectone.model.entities;
 
-import java.sql.Timestamp;
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.sql.Timestamp;
 
 @Builder
 @Getter

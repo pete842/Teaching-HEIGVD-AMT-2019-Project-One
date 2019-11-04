@@ -1,7 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
-import org.omg.PortableInterceptor.Interceptor;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

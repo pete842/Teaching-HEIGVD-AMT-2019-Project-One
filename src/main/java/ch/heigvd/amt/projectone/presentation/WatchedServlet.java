@@ -30,7 +30,8 @@ public class WatchedServlet extends HttpServlet {
         }
 
         req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pageNumber, pageSize));
-        req.setAttribute("totalEntries", mediaUserDAO.countAllWatchedByUser(user_id));
+        req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
+        req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
         req.setAttribute("pageSize", pageSize.toString());
         req.setAttribute("pageNumber", pageNumber.toString());
 
