@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
-import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
+import ch.heigvd.amt.projectone.services.dao.MediaDAOLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/watched")
-public class WatchedServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/movies")
+public class MoviesServlet extends HttpServlet {
     @EJB
-    private MediaUserDAOLocal mediaUserDAO;
+    private MediaDAOLocal mediaDAO;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer user_id = (Integer) req.getSession().getAttribute("user_id");
         Integer pageSize = 5;
         Integer pageNumber = 1;
 
@@ -29,8 +28,8 @@ public class WatchedServlet extends HttpServlet {
             pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
         }
 
-        req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pageNumber, pageSize));
-        req.setAttribute("totalEntries", mediaUserDAO.countAllWatchedByUser(user_id));
+        req.setAttribute("watched", mediaDAO.findAllPaged(pageNumber, pageSize));
+        req.setAttribute("totalEntries", mediaDAO.countAll());
         req.setAttribute("pageSize", pageSize.toString());
         req.setAttribute("pageNumber", pageNumber.toString());
 

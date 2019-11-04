@@ -47,8 +47,8 @@ public class MediaUserDAO implements MediaUserDAOLocal {
         return result;
     }
 
-    private List<MediaUser> countAllByUserTyped(Integer userId, boolean watched) {
-        List<MediaUser> result = new LinkedList<>();
+    private Integer countAllByUserTyped(Integer userId, boolean watched) {
+        Integer result = 0;
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(
@@ -58,7 +58,7 @@ public class MediaUserDAO implements MediaUserDAOLocal {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                result.add(SQLExtractor.extractMediaUser(rs));
+                result = rs.getInt(1);
             }
 
             ps.close();
@@ -71,12 +71,12 @@ public class MediaUserDAO implements MediaUserDAOLocal {
     }
 
     @Override
-    public List<MediaUser> totalAllWatchedByUser(Integer userId) {
+    public Integer countAllWatchedByUser(Integer userId) {
         return countAllByUserTyped(userId, true);
     }
 
     @Override
-    public List<MediaUser> totalAllToWatchByUser(Integer userId) {
+    public Integer countAllToWatchByUser(Integer userId) {
         return countAllByUserTyped(userId, false);
     }
 

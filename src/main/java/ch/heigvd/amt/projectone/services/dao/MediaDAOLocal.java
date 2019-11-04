@@ -9,4 +9,5 @@ import java.util.List;
 @Local
 public interface MediaDAOLocal {
     public List<Media> findAllPaged(Integer pageNumber, Integer pageSize);
+    public Integer countAll();
 }

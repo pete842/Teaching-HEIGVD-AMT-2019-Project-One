@@ -8,9 +8,9 @@ import java.util.List;
 @Local
 public interface MediaUserDAOLocal {
     public List<MediaUser> findAllToWatchByUserPaged(Integer userId, Integer pageNumber, Integer pageSize);
-    public List<MediaUser> totalAllToWatchByUser(Integer userId);
+    public Integer countAllToWatchByUser(Integer userId);
 
     public List<MediaUser> findAllWatchedByUserPaged(Integer userId, Integer pageNumber, Integer pageSize);
-    public List<MediaUser> totalAllWatchedByUser(Integer userId);
+    public Integer countAllWatchedByUser(Integer userId);
 
 }

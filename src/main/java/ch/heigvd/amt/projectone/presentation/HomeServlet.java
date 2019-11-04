@@ -31,8 +31,8 @@ public class HomeServlet extends HttpServlet {
         }
 
         req.setAttribute("toWatch", mediaUserDAO.findAllToWatchByUserPaged(user_id, pageNumber, pageSize));
-        req.setAttribute("totalEntriesToWatch", mediaUserDAO.totalAllToWatchByUser(user_id));
-        req.setAttribute("totalEntriesWatched", mediaUserDAO.totalAllWatchedByUser(user_id));
+        req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
+        req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
         req.setAttribute("pageSize", pageSize.toString());
         req.setAttribute("pageNumber", pageNumber.toString());
 

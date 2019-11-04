@@ -42,4 +42,26 @@ public class MediaDAO implements MediaDAOLocal {
         }
         return result;
     }
+
+    @Override
+    public Integer countAll() {
+        int result = 0;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT count(*) FROM medias");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt(1);
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MediaUserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
+    }
 }
