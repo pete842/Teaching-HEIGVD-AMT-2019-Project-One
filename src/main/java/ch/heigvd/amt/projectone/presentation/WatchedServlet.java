@@ -1,7 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
-import org.omg.PortableInterceptor.Interceptor;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/watched")
+public class WatchedServlet extends HttpServlet {
     @EJB
     private MediaUserDAOLocal mediaUserDAO;
 
@@ -30,12 +29,11 @@ public class HomeServlet extends HttpServlet {
             pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
         }
 
-        req.setAttribute("toWatch", mediaUserDAO.findAllToWatchByUserPaged(user_id, pageNumber, pageSize));
-        req.setAttribute("totalEntriesToWatch", mediaUserDAO.totalAllToWatchByUser(user_id));
-        req.setAttribute("totalEntriesWatched", mediaUserDAO.totalAllWatchedByUser(user_id));
+        req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pageNumber, pageSize));
+        req.setAttribute("totalEntries", mediaUserDAO.totalAllWatchedByUser(user_id));
         req.setAttribute("pageSize", pageSize.toString());
         req.setAttribute("pageNumber", pageNumber.toString());
 
-        req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }
 }

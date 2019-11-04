@@ -7,5 +7,10 @@ import java.util.List;
 
 @Local
 public interface MediaUserDAOLocal {
-    public List<MediaUser> findAllByUser(Integer userId);
+    public List<MediaUser> findAllToWatchByUserPaged(Integer userId, Integer pageNumber, Integer pageSize);
+    public List<MediaUser> totalAllToWatchByUser(Integer userId);
+
+    public List<MediaUser> findAllWatchedByUserPaged(Integer userId, Integer pageNumber, Integer pageSize);
+    public List<MediaUser> totalAllWatchedByUser(Integer userId);
+
 }

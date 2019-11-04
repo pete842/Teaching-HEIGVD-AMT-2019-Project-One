@@ -21,12 +21,16 @@ public class MediaDAO implements MediaDAOLocal {
     private DataSource dataSource;
 
     @Override
-    public List<Media> findAll() {
+    public List<Media> findAllPaged(Integer pageNumber, Integer pageSize) {
         List<Media> result = new LinkedList<>();
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias OFFSET ? LIMIT ?");
+            ps.setInt(1, pageNumber * pageSize);
+            ps.setInt(2, pageSize);
+
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 result.add(SQLExtractor.extractMedia(rs));
             }
