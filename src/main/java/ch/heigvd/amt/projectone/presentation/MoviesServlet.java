@@ -28,11 +28,11 @@ public class MoviesServlet extends HttpServlet {
             pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
         }
 
-        req.setAttribute("watched", mediaDAO.findAllPaged(pageNumber, pageSize));
+        req.setAttribute("movies", mediaDAO.findAllPaged(pageNumber, pageSize));
         req.setAttribute("totalEntries", mediaDAO.countAll());
         req.setAttribute("pageSize", pageSize.toString());
         req.setAttribute("pageNumber", pageNumber.toString());
 
-        req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(req, resp);
     }
 }
