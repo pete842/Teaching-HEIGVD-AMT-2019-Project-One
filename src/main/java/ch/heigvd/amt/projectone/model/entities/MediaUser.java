@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class MediaUser {
-    private long id;
+    private Integer id;
     private User user;
     private Media media;
     private Integer rating;

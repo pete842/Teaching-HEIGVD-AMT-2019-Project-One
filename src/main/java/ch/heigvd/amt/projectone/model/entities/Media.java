@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Media {
-    private long id;
+    private Integer id;
     private String title;
     private Timestamp release;
     private Integer duration;

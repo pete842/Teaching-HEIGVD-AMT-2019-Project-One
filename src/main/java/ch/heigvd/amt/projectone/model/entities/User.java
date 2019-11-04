@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @EqualsAndHashCode
 public class User {
-    private long id;
+    private Integer id;
     private String username;
     private String firstName;
     private String lastName;
