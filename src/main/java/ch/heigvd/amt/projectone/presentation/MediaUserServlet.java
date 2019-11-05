@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @WebServlet(urlPatterns = "/media_user")
@@ -44,8 +45,8 @@ public class MediaUserServlet extends BaseHttpServlet {
                 .user(
                         User.builder().id((Integer) req.getSession().getAttribute("user_id")).build()
                 )
-                .rating(Integer.parseInt(req.getParameter("rating")))
-                .watched(Timestamp.valueOf(req.getParameter("watched"))).build();
+                .rating((req.getParameter("rating") != null) ? Integer.parseInt(req.getParameter("rating")) : null)
+                .watched((req.getParameter("watched") != null) ? Timestamp.valueOf(req.getParameter("watched")) : null).build();
 
         try {
             mediaUserDAO.create(mediaUser);
@@ -63,7 +64,9 @@ public class MediaUserServlet extends BaseHttpServlet {
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
         Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
         Integer rating = Integer.parseInt(req.getParameter("rating"));
-        Integer watched = Integer.parseInt(req.getParameter("watched"));
+        Timestamp watched = Timestamp.valueOf(req.getParameter("watched"));
+
+        System.out.println(watched);
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 

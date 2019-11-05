@@ -6,10 +6,7 @@ import ch.heigvd.amt.projectone.services.dao.extractor.SQLExtractor;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -122,8 +119,18 @@ public class MediaUserDAO implements MediaUserDAOLocal {
             PreparedStatement ps = con.prepareStatement("INSERT INTO user_media (media_id, user_id, `rating`, watched) value (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mediaUser.getMedia().getId());
             ps.setInt(2, mediaUser.getUser().getId());
-            ps.setInt(3, mediaUser.getRating());
-            ps.setTimestamp(4, mediaUser.getWatched());
+
+            if (mediaUser.getRating() == null) {
+                ps.setNull(3, Types.INTEGER);
+            } else {
+                ps.setInt(3, mediaUser.getRating());
+            }
+
+            if (mediaUser.getWatched() == null) {
+                ps.setNull(3, Types.TIMESTAMP);
+            } else {
+                ps.setTimestamp(4, mediaUser.getWatched());
+            }
 
             ResultSet rs = ps.getGeneratedKeys();
 
