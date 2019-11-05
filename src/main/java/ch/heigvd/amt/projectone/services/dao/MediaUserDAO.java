@@ -116,7 +116,7 @@ public class MediaUserDAO implements MediaUserDAOLocal {
 
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO user_media (media_id, user_id, `rating`, watched) value (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO media_user (media_id, user_id, `rating`, watched) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mediaUser.getMedia().getId());
             ps.setInt(2, mediaUser.getUser().getId());
 
@@ -127,11 +127,12 @@ public class MediaUserDAO implements MediaUserDAOLocal {
             }
 
             if (mediaUser.getWatched() == null) {
-                ps.setNull(3, Types.TIMESTAMP);
+                ps.setNull(4, Types.TIMESTAMP);
             } else {
                 ps.setTimestamp(4, mediaUser.getWatched());
             }
 
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
             if(rs.next())

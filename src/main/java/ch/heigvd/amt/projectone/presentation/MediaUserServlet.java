@@ -17,6 +17,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(urlPatterns = "/media_user")
 public class MediaUserServlet extends BaseHttpServlet {
@@ -46,7 +50,11 @@ public class MediaUserServlet extends BaseHttpServlet {
                         User.builder().id((Integer) req.getSession().getAttribute("user_id")).build()
                 )
                 .rating((req.getParameter("rating") != null) ? Integer.parseInt(req.getParameter("rating")) : null)
-                .watched((req.getParameter("watched") != null) ? Timestamp.valueOf(req.getParameter("watched")) : null).build();
+                .watched(
+                        (req.getParameter("watched") != null) ?
+                                Timestamp.valueOf(LocalDate.parse(req.getParameter("watched"), DateTimeFormatter.ofPattern("MM/dd/yyyy")).atStartOfDay())
+                                : null
+                ).build();
 
         try {
             mediaUserDAO.create(mediaUser);

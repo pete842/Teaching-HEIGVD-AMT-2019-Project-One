@@ -79,6 +79,7 @@ public class UserDAO implements UserDAOLocal {
             ps.setString(4, user.getFirstName());
             ps.setString(5, user.getLastName());
 
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
             if(rs.next())
