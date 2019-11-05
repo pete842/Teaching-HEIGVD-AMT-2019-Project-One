@@ -114,6 +114,27 @@ public class MediaUserDAO implements MediaUserDAOLocal {
     }
 
     @Override
+    public boolean update(MediaUser mediaUser) {
+        int row = 0;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE FROM media_user SET `rating` = ?, `watched` = ? WHERE id = ?");
+            ps.setInt(3, mediaUser.getRating());
+            ps.setTimestamp(3, mediaUser.getWatched());
+            ps.setInt(3, mediaUser.getId());
+
+            row = ps.executeUpdate();
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MediaUserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return (row > 0);
+    }
+
+    @Override
     public boolean delete(MediaUser mediaUser) {
         int row = 0;
         try {

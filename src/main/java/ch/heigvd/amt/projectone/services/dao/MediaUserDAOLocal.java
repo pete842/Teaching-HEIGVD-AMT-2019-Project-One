@@ -14,5 +14,6 @@ public interface MediaUserDAOLocal {
     public Integer countAllWatchedByUser(Integer userId);
 
     public MediaUser get(Integer userId, Integer mediaId);
+    public boolean update(MediaUser mediaUser);
     public boolean delete(MediaUser mediaUser);
 }

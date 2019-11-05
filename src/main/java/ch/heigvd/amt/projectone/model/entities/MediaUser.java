@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@Builder
+@Builder(toBuilder=true)
 @Getter
 @EqualsAndHashCode
 public class MediaUser {

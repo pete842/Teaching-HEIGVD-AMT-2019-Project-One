@@ -1,6 +1,7 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.model.entities.MediaUser;
+import ch.heigvd.amt.projectone.model.entities.Pagination;
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
 
 import javax.ejb.EJB;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/watched")
 public class WatchedServlet extends BaseHttpServlet {
-    private final static String[] deleteParamsToReturn = new String[]{"user_id", "media_id"};
+    private final static String[] deleteParamsToReturn = new String[]{"media_id"};
     private final static String[] deleteMandatoryParams = deleteParamsToReturn;
 
     @EJB
@@ -20,23 +21,15 @@ public class WatchedServlet extends BaseHttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Pagination pagination = new Pagination().from(req);
+
         Integer user_id = (Integer) req.getSession().getAttribute("user_id");
-        Integer pageSize = 5;
-        Integer pageNumber = 1;
 
-        if (req.getParameter("pageSize") != null) {
-            pageSize = Integer.parseInt(req.getParameter("pageSize"));
-        }
-
-        if (req.getParameter("pageNumber") != null) {
-            pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
-        }
-
-        req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pageNumber, pageSize));
+        req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pagination.getNumber(), pagination.getSize()));
         req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
         req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
-        req.setAttribute("pageSize", pageSize.toString());
-        req.setAttribute("pageNumber", pageNumber.toString());
+
+        pagination.set(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }
@@ -44,19 +37,11 @@ public class WatchedServlet extends BaseHttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/WEB-INF/pages/watched.jsp", deleteParamsToReturn)) return;
+
+        Pagination pagination = new Pagination().from(req);
+
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
         Integer mediaId = (Integer) req.getAttribute("media_id");
-
-        Integer pageSize = 5;
-        Integer pageNumber = 1;
-
-        if (req.getParameter("pageSize") != null) {
-            pageSize = Integer.parseInt(req.getParameter("pageSize"));
-        }
-
-        if (req.getParameter("pageNumber") != null) {
-            pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
-        }
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
@@ -68,8 +53,7 @@ public class WatchedServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        req.setAttribute("pageSize", pageSize.toString());
-        req.setAttribute("pageNumber", pageNumber.toString());
+        pagination.set(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }
