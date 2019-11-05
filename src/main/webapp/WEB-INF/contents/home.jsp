@@ -16,17 +16,17 @@
             <h1 class="title">Welcome to your media library</h1>
             <h3 class="title">${sessionScope.firstname} ${sessionScope.lastname}</h3>
             <div class="content">
+                <a href="home#towatch" class="btn btn-primary disabled">
+                    <div class="social-description">
+                        <h2>${totalEntriesToWatch}</h2>
+                        <p>To Watch</p>
+                    </div>
+                </a>
+
                 <a href="watched#watched" class="btn btn-outline-secondary">
                     <div class="social-description">
                         <h2>${totalEntriesWatched}</h2>
                         <p>Watched</p>
-                    </div>
-                </a>
-
-                <a href="home#towatch" class="btn btn-outline-secondary">
-                    <div class="social-description">
-                        <h2>${totalEntriesToWatch}</h2>
-                        <p>To Watch</p>
                     </div>
                 </a>
             </div>
@@ -73,7 +73,11 @@
             <ul class="pagination justify-content-center">
                 <li class="page-item">
                     <select class="form-control bg-default text-white" id="selectPageSize"
-                            onchange='location.href="home?pageNumber=${pageNumber}&pageSize=" + this.value + "#towatch"'>
+                            onchange='location.href="home?pageNumber="
+                                    + Math.min(${pageNumber}, ${totalEntriesWatched} / this.value - 1)
+                                    + "&pageSize="
+                                    + this.value
+                                    + "#towatch"' >
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -82,24 +86,22 @@
                     </select>
                     <script>
                         let i;
-                        switch (pageSize) {
-                            case "5":
+                        switch (${pageSize}) {
+                            case 5:
                                 i = 0;
                                 break;
-                            case "10":
+                            case 10:
                                 i = 1;
                                 break;
-                            case "20":
+                            case 20:
                                 i = 2;
                                 break;
-                            case "50":
+                            case 50:
                                 i = 3;
                                 break;
                             default:
                                 i = 4;
                         }
-
-                        document.getElementById("selectPageSize").options[i].selected = true;
                     </script>
                 </li>
                 <li class="page-item <c:if test="${pageNumber == 0}">disabled</c:if>">
