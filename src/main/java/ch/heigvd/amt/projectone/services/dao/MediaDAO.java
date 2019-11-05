@@ -25,9 +25,9 @@ public class MediaDAO implements MediaDAOLocal {
         List<Media> result = new LinkedList<>();
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias OFFSET ? LIMIT ?");
-            ps.setInt(1, pageNumber * pageSize);
-            ps.setInt(2, pageSize);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias LIMIT ? OFFSET ?");
+            ps.setInt(1, pageSize);
+            ps.setInt(2, (pageNumber - 1) * pageSize);
 
             ResultSet rs = ps.executeQuery();
 

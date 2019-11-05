@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesWatched / pageSize}"/>
+<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesToWatch / pageSize}"/>
 
 <div class="page-header page-header-small">
     <div class="page-header-image" data-parallax="true"
@@ -30,15 +30,15 @@
 </div>
 <div class="section">
     <div class="container">
-        <button class="btn btn-wd btn-primary btn-round float-right"><i class="fa fa-plus"></i> Add</button>
+        <button class="btn btn-wd btn-primary btn-round float-right" type="button"><i class="fa fa-plus"></i> Add</button>
         <h2 id="watched">Watched</h2>
         <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Release date</th>
+                <th scope="col">Genres</th>
+                <th scope="col" class="text-right">Release date</th>
                 <th scope="col" class="text-right">Duration</th>
-                <th scope="col">Genre</th>
                 <th scope="col" class="text-right">Rating</th>
                 <th scope="col" class="text-right">IMBD</th>
                 <th scope="col"></th>
@@ -48,10 +48,6 @@
             <c:forEach var="current" items="${watched}">
                 <tr>
                     <td><c:out value="${current.getMedia().getTitle()}"/></td>
-                    <td><fmt:formatDate value="${current.getMedia().getRelease()}"
-                                        pattern="MM.dd.yyyy HH:mm"/>
-                    </td>
-                    <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td>
                         <c:forTokens var="tag" items="${current.getMedia().getMainGenre()}" delims="|">
                         <span class="badge badge-primary">
@@ -59,6 +55,10 @@
                         </span>
                         </c:forTokens>
                     </td>
+                    <td class="text-right"><fmt:formatDate value="${current.getMedia().getRelease()}"
+                                        pattern="MM.dd.yyyy"/>
+                    </td>
+                    <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td class="text-right">
                         <c:out value="${current.getRating()}"/>
                         <i class="fa fa-star" style="color: gold"></i>
@@ -68,123 +68,26 @@
                         <i class="fa fa-star"></i>
                     </td>
                     <td class="text-right">
+                        <form method="post" action="watched" id="delete${current.getMedia().getId()}">
+                            <input type="hidden" name="delete"/>
+                            <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
+                        </form>
                         <div class="dropdown">
-                            <a class="text-black" id="dropdownMenuButton" href="#"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-edit "></i></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#"><i class="fa fa-pen"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trash"></i>Delete</a>
-                            </div>
+                            <a class="text-black" style="cursor: pointer" onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i class="fa fa-trash "></i></a>
                         </div>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-        <nav aria-label="Page nav to watch" class="pagination-container  justify-content-center">
-            <ul class="pagination">
-                <li class="page-item">
-                    <select class="form-control bg-default text-white" id="selectPageSize"
-                            onchange='location.href="watched?pageNumber="
-                                    + Math.min(${pageNumber}, Math.ceil(${totalEntriesWatched} / this.value))
-                                    + "&pageSize="
-                                    + this.value
-                                    + "#watched"'>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="${pageSize * (nbPages + 1)}">All</option>
-                    </select>
-                    <script>
-                        let i;
-                        switch (${pageSize}) {
-                            case 5:
-                                i = 0;
-                                break;
-                            case 10:
-                                i = 1;
-                                break;
-                            case 20:
-                                i = 2;
-                                break;
-                            case 50:
-                                i = 3;
-                                break;
-                            default:
-                                i = 4;
-                        }
-
-                        document.getElementById("selectPageSize").options[i].selected = true;
-                    </script>
-                </li>
-                <li class="page-item <c:if test="${pageNumber == 0}">disabled</c:if>">
-                    <a class="page-link " href="watched?pageNumber=${pageNumber-1}&amp;pageSize=${pageSize}#watched"><i
-                            class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-                </li>
-                <c:choose>
-                    <c:when test="${nbPages > 7}">
-                        <c:if test="${pageNumber > 3}">
-                            <li class="page-item">
-                                <a class="page-link" href="watched?pageNumber=1&amp;pageSize=${pageSize}#watched">1</a>
-                            </li>
-                            <li class="page-item">
-                                <p>...
-                                <p/>
-                            </li>
-                        </c:if>
-                        <c:if test="${pageNumber < 4}">
-                            <c:forEach var="i" begin="1" end="${Math.max(pageNumber + 1, 3)}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="watched?pageNumber=${i}&amp;pageSize=${pageSize}#watched">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${pageNumber > 3 && pageNumber < nbPages - 2}">
-                            <c:forEach var="i" begin="${pageNumber - 1}" end="${pageNumber + 1}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="watched?pageNumber=${i}&amp;pageSize=${pageSize}#watched">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-
-
-                        <c:if test="${pageNumber >= nbPages - 2}">
-                            <c:forEach var="i" begin="${Math.min(pageNumber - 1, nbPages - 2)}" end="${nbPages}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="watched?pageNumber=${i}&amp;pageSize=${pageSize}#watched">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${pageNumber < nbPages - 2}">
-                            <li class="page-item">
-                                <p>...
-                                <p/>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link"
-                                   href="watched?pageNumber=${nbPages}&amp;pageSize=${pageSize}#watched">${nbPages}</a>
-                            </li>
-                        </c:if>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach var="i" begin="1" end="${nbPages}">
-                            <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                <a class="page-link"
-                                   href="watched?pageNumber=${i}&amp;pageSize=${pageSize}#watched">${i}</a>
-                            </li>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-                <li class="page-item <c:if test="${pageNumber == nbPages}">disabled</c:if>">
-                    <a class="page-link " href="watched?pageNumber=${pageNumber+1}&amp;pageSize=${pageSize}#watched"><i
-                            class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </nav>
+        <jsp:include page="/WEB-INF/components/pagination.jsp">
+            <jsp:param name="nbPages" value="${nbPages}"/>
+            <jsp:param name="pageSize" value="${pageSize}"/>
+            <jsp:param name="pageNumber" value="${pageNumber}"/>
+            <jsp:param name="totalEntries" value="${totalEntriesWatched}"/>
+            <jsp:param name="preUrl" value="watched?"/>
+            <jsp:param name="postUrl" value="#watched"/>
+        </jsp:include>
     </div>
 </div>
 

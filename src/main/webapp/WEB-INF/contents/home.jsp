@@ -69,11 +69,18 @@
                     </td>
                     <td class="text-right">
                         <div class="dropdown">
+                            <form method="post" action="home" id="delete${current.getMedia().getId()}">
+                                <input type="hidden" name="delete"/>
+                                <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
+                            </form>
                             <a class="text-black" id="dropdownMenuButton" href="#"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-edit"></i></a>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="fa fa-edit"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#"><i class="fa fa-check"></i>Watched</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trash"></i>Delete</a>
+                                <a class="dropdown-item" style="cursor: pointer"
+                                   onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i
+                                        class="fa fa-trash "></i>Delete</a>
                             </div>
                         </div>
                     </td>
@@ -81,109 +88,14 @@
             </c:forEach>
             </tbody>
         </table>
-        <nav aria-label="Page nav to watch">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <select class="form-control bg-default text-white" id="selectPageSize"
-                            onchange='location.href="home?pageNumber="
-                                    + Math.min(${pageNumber}, Math.ceil(${totalEntriesWatched} / this.value))
-                                    + "&pageSize="
-                                    + this.value
-                                    + "#towatch"'>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="${pageSize * (nbPages + 1)}">All</option>
-                    </select>
-                    <script>
-                        let i;
-                        switch (${pageSize}) {
-                            case 5:
-                                i = 0;
-                                break;
-                            case 10:
-                                i = 1;
-                                break;
-                            case 20:
-                                i = 2;
-                                break;
-                            case 50:
-                                i = 3;
-                                break;
-                            default:
-                                i = 4;
-                        }
-                    </script>
-                </li>
-                <li class="page-item <c:if test="${pageNumber == 0}">disabled</c:if>">
-                    <a class="page-link "
-                       onclick="location.href=this.href+'&pageSize='+pageSize+'#towatch';return false;"
-                       href="home?pageNumber=${pageNumber-1}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-                </li>
-                <c:choose>
-                    <c:when test="${nbPages > 7}">
-                        <c:if test="${pageNumber > 3}">
-                            <li class="page-item">
-                                <a class="page-link" href="home?pageNumber=1&amp;pageSize=${pageSize}#towatch">1</a>
-                            </li>
-                            <li class="page-item">
-                                <p>...
-                                <p/>
-                            </li>
-                        </c:if>
-                        <c:if test="${pageNumber < 4}">
-                            <c:forEach var="i" begin="1" end="${Math.max(pageNumber + 1, 3)}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${pageNumber > 3 && pageNumber < nbPages - 2}">
-                            <c:forEach var="i" begin="${pageNumber - 1}" end="${pageNumber + 1}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-
-
-                        <c:if test="${pageNumber >= nbPages - 2}">
-                            <c:forEach var="i" begin="${Math.min(pageNumber - 1, nbPages - 2)}" end="${nbPages}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${pageNumber < nbPages - 2}">
-                            <li class="page-item">
-                                <p>...
-                                <p/>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link"
-                                   href="home?pageNumber=${nbPages}&amp;pageSize=${pageSize}#towatch">${nbPages}</a>
-                            </li>
-                        </c:if>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach var="i" begin="1" end="${nbPages}">
-                            <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                <a class="page-link"
-                                   href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
-                            </li>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-                <li class="page-item <c:if test="${pageNumber == nbPages}">disabled</c:if>">
-                    <a class="page-link " href="home?pageNumber=${pageNumber+1}&amp;pageSize=${pageSize}#towatch"><i
-                            class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </nav>
+        <jsp:include page="/WEB-INF/components/pagination.jsp">
+            <jsp:param name="nbPages" value="${nbPages}"/>
+            <jsp:param name="pageSize" value="${pageSize}"/>
+            <jsp:param name="pageNumber" value="${pageNumber}"/>
+            <jsp:param name="totalEntries" value="${totalEntriesWatched}"/>
+            <jsp:param name="preUrl" value="home?"/>
+            <jsp:param name="postUrl" value="#towatch"/>
+        </jsp:include>
     </div>
 </div>
 
