@@ -7,7 +7,6 @@ import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class HomeServlet extends BaseHttpServlet {
         req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
         req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
 
-        pagination.set(req);
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     }
@@ -61,7 +60,7 @@ public class HomeServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de mettre à jour un élément inexistant");
         }
 
-        pagination.set(req);
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     }
@@ -85,7 +84,7 @@ public class HomeServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        pagination.set(req);
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     }

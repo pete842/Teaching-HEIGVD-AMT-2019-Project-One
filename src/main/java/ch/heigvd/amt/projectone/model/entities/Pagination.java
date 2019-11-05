@@ -35,7 +35,7 @@ public class Pagination {
         return this;
     }
 
-    public void set(HttpServletRequest req) {
+    public void setOn(HttpServletRequest req) {
         req.setAttribute("pageSize", size.toString());
         req.setAttribute("pageNumber", number.toString());
     }

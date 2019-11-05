@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
+import ch.heigvd.amt.projectone.model.entities.Pagination;
 import ch.heigvd.amt.projectone.services.dao.MediaDAOLocal;
 
 import javax.ejb.EJB;
@@ -17,21 +18,12 @@ public class MoviesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer pageSize = 5;
-        Integer pageNumber = 1;
+        Pagination pagination = new Pagination().from(req);
 
-        if (req.getParameter("pageSize") != null) {
-            pageSize = Integer.parseInt(req.getParameter("pageSize"));
-        }
-
-        if (req.getParameter("pageNumber") != null) {
-            pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
-        }
-
-        req.setAttribute("movies", mediaDAO.findAllPaged(pageNumber, pageSize));
+        req.setAttribute("movies", mediaDAO.findAllPaged(pagination.getNumber(), pagination.getSize()));
         req.setAttribute("totalEntries", mediaDAO.countAll());
-        req.setAttribute("pageSize", pageSize.toString());
-        req.setAttribute("pageNumber", pageNumber.toString());
+
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(req, resp);
     }

@@ -29,7 +29,7 @@ public class WatchedServlet extends BaseHttpServlet {
         req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
         req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
 
-        pagination.set(req);
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }
@@ -53,7 +53,7 @@ public class WatchedServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        pagination.set(req);
+        pagination.setOn(req);
 
         req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }
