@@ -1,7 +1,6 @@
 package ch.heigvd.amt.projectone.model.entities;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,3 +16,4 @@ public class MediaUser {
     private Integer rating;
     private Timestamp watched;
 }
+

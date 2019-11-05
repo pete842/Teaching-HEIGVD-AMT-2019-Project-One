@@ -13,4 +13,6 @@ public interface MediaUserDAOLocal {
     public List<MediaUser> findAllWatchedByUserPaged(Integer userId, Integer pageNumber, Integer pageSize);
     public Integer countAllWatchedByUser(Integer userId);
 
+    public MediaUser get(Integer userId, Integer mediaId);
+    public boolean delete(MediaUser mediaUser);
 }

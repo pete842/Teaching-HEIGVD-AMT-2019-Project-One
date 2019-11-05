@@ -26,6 +26,7 @@ public class MediaUserDAO implements MediaUserDAOLocal {
             Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(
                     "SELECT media_user.id, media_user.user_id, media_user.media_id, media_user.`rating` AS `personnal_rating`, media_user.watched, users.*, medias.* FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id WHERE user_id = ? AND watched " + ((watched)? "IS NOT" : "IS") + " NULL LIMIT ? OFFSET ?");
+
             ps.setInt(1, userId);
             ps.setInt(2, pageSize);
             ps.setInt(3, (pageNumber-1) * pageSize);
@@ -85,5 +86,49 @@ public class MediaUserDAO implements MediaUserDAOLocal {
     public List<MediaUser> findAllToWatchByUserPaged(Integer userId, Integer pageNumber, Integer pageSize) {
         return findAllByUserTypedPaged(userId, false, pageNumber, pageSize);
 
+    }
+
+    @Override
+    public MediaUser get(Integer userId, Integer mediaId) {
+        MediaUser result = null;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT media_user.id, media_user.user_id, media_user.media_id, media_user.`rating` AS `personnal_rating`, media_user.watched, users.*, medias.* FROM media_user INNER JOIN medias ON media_id = medias.id INNER JOIN users ON user_id = users.id WHERE user_id = ? AND media_id = ?");
+
+            ps.setInt(1, userId);
+            ps.setInt(2, mediaId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result = SQLExtractor.extractMediaUser(rs);
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MediaUserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean delete(MediaUser mediaUser) {
+        int row = 0;
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM media_user WHERE id = ?");
+            ps.setInt(1, mediaUser.getId());
+
+            row = ps.executeUpdate();
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MediaUserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return (row > 0);
     }
 }
