@@ -73,7 +73,7 @@
                             <input type="hidden" name="back" value="watched?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                         </form>
                         <div class="dropdown">
-                            <a class="text-black" style="cursor: pointer" onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i class="fa fa-trash "></i></a>
+                            <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="Remove from the list?" style="cursor: pointer" onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i class="fa fa-trash "></i></a>
                         </div>
                     </td>
                 </tr>

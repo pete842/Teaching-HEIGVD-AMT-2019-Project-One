@@ -68,9 +68,9 @@
                                 <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
                                 <input type="hidden" name="back" value="home?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                             </form>
-                            <a class="text-black" id="dropdownMenuButton" href="#"
+                            <a class="text-black dropdown-toggle" id="dropdownMenuButton" href="#"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                    class="fa fa-edit"></i></a>
+                                    class="fa fa-edit dropdown-toggle-split"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a  href="#" class="dropdown-item setWatched" data-toggle="modal" data-target="#watchedModal"
                                    data-id="${current.getMedia().getId()}"><i

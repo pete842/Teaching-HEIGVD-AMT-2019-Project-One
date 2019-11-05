@@ -61,8 +61,9 @@
                     <td class="text-center">
                         <c:choose>
                             <c:when test="${watched}">
-                                <form method="post" action="media_user?action=delete" id="delete${current.getId()}">
+                                <form method="post" action="media_user" id="delete${current.getId()}">
                                     <input type="hidden" name="media_id" value="${current.getId()}"/>
+                                    <input type="hidden" name="action" value="delete"/>
                                     <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                                 </form>
                                 <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="Remove from watched list?"
@@ -70,23 +71,19 @@
                                         class="fa fa-eye"></i></a>
                             </c:when>
                             <c:when test="${inserted}">
-                                <form method="post" action="media_user?action=put" id="watched${current.getId()}">
-                                    <input type="hidden" name="media_id" value="${current.getId()}"/>
-                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
-                                </form>
-                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You watched it?"
-                                   onclick='document.getElementById("watched${current.getId()}").submit()'><i
-                                        class="fa fa-eye-slash"></i><i class="fa fa-calendar-check"></i></a>
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?" data-toggle="modal"
+                                   data-target="#watchedModal" data-id="${current.getId()}" data-action="put"><i
+                                        class="fa fa-eye-slash"></i></a>
                             </c:when>
                             <c:otherwise>
-                                <form method="post" action="media_user?action=post" id="toWatch${current.getId()}">
+                                <form method="post" action="media_user" id="toWatch${current.getId()}">
                                     <input type="hidden" name="media_id" value="${current.getId()}"/>
                                     <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                                 </form>
-                                <a style="cursor: pointer" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You watched it?" data-toggle="modal"
-                                   data-target="#watchedModal" data-id="${current.getId()}"><i
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?" data-toggle="modal"
+                                   data-target="#watchedModal" data-id="${current.getId()}" data-action="post"><i
                                         class="fa fa-eye-slash"></i></a>
-                                <a style="cursor: pointer" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You want to watch it?"
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You want to watch it?"
                                    onclick='document.getElementById("toWatch${current.getId()}").submit()'><i
                                         class="fa fa-calendar-alt "></i></a>
                             </c:otherwise>
@@ -121,6 +118,7 @@
             <form action="media_user" method="post">
                 <div class="modal-body">
                     <input type="hidden" value="" name="media_id" id="watchedModalMediaId"/>
+                    <input type="hidden" value="" name="action" id="watchedModalAction"/>
                     <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
 
                     <div class="form-group">
@@ -148,7 +146,9 @@
     $(document).ready(function () {
         $('.setWatched').click(function () {
             let id = $(this).data('id');
+            let action = $(this).data('action');
             $("#watchedModalMediaId").attr("value", id);
+            $("#watchedModalAction").attr("value", action);
         });
     });
 </script>
