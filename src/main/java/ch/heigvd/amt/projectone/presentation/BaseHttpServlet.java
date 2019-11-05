@@ -3,10 +3,28 @@ package ch.heigvd.amt.projectone.presentation;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class BaseHttpServlet extends HttpServlet {
+    protected void forwardBack(HttpServletRequest req, HttpServletResponse resp, String onMissing) throws ServletException, IOException {
+        String previousURL = onMissing;
+
+        if (req.getParameter("back") != null) {
+            previousURL = req.getParameter("back");
+        }
+
+        req.getRequestDispatcher(previousURL).forward(new HttpServletRequestWrapper(req) {
+            @Override
+            public String getMethod() {
+                return "GET";
+            }
+        }, resp);
+    }
+
     protected boolean doHTMLFormBetter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 

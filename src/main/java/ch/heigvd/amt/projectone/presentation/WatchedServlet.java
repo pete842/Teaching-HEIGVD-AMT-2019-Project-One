@@ -5,9 +5,11 @@ import ch.heigvd.amt.projectone.model.entities.Pagination;
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -22,8 +24,6 @@ public class WatchedServlet extends BaseHttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Pagination pagination = new Pagination().from(req);
-
-        System.out.println(req.getHeader("referer"));
 
         Integer user_id = (Integer) req.getSession().getAttribute("user_id");
 
@@ -61,6 +61,11 @@ public class WatchedServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        doGet(req, resp);
+        req.getRequestDispatcher("/home"). forward(new HttpServletRequestWrapper(req) {
+            @Override
+            public String getMethod() {
+                return "GET";
+            }
+        }, resp);
     }
 }
