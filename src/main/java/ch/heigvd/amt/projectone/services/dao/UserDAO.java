@@ -69,9 +69,10 @@ public class UserDAO implements UserDAOLocal {
     @Override
     public User create(User user) throws SQLException {
         User result = null;
+
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT users (username, password, email, firstname, lastname) value (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users (username, password, email, firstname, lastname) value (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());

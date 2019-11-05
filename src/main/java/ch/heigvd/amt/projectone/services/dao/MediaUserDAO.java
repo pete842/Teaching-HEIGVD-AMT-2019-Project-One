@@ -114,6 +114,34 @@ public class MediaUserDAO implements MediaUserDAOLocal {
     }
 
     @Override
+    public MediaUser create(MediaUser mediaUser) throws SQLException {
+        MediaUser result = mediaUser;
+
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO user_media (media_id, user_id, `rating`, watched) value (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, mediaUser.getMedia().getId());
+            ps.setInt(2, mediaUser.getUser().getId());
+            ps.setInt(3, mediaUser.getRating());
+            ps.setTimestamp(4, mediaUser.getWatched());
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if(rs.next())
+            {
+                result = mediaUser.toBuilder().id(rs.getInt(1)).build();
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return result;
+    }
+
+    @Override
     public boolean update(MediaUser mediaUser) {
         int row = 0;
         try {

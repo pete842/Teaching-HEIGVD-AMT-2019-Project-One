@@ -38,6 +38,14 @@ public class HomeServlet extends BaseHttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (doHTTPFormBetter(req, resp)) return;
+
+        req.setAttribute("error", "Unimplemented Method !");
+        responseToFailure(req, resp, new String[0], "/WEB-INF/pages/home.jsp");
+    }
+
+    @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, putMandatoryParams, "/WEB-INF/pages/home.jsp", putParamsToReturn)) return;
 

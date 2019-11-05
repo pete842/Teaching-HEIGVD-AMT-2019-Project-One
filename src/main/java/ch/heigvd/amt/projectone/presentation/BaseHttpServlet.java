@@ -7,6 +7,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class BaseHttpServlet extends HttpServlet {
+    protected boolean doHTTPFormBetter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+
+        if (action == null) return false;
+
+        if (action.equalsIgnoreCase("DELETE")) {
+            this.doDelete(req, resp);
+            return true;
+        }
+        else if (action.equalsIgnoreCase("PUT")) {
+            this.doPut(req, resp);
+            return true;
+        }
+
+        return false;
+    }
+
     protected boolean checkMandatoryParameters(HttpServletRequest req, HttpServletResponse resp, String[] params, String onFailureUrl) throws ServletException, IOException {
         return this.checkMandatoryParameters(req, resp, params, onFailureUrl, params);
     }

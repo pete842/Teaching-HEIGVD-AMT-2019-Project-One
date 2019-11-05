@@ -35,6 +35,14 @@ public class WatchedServlet extends BaseHttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (doHTTPFormBetter(req, resp)) return;
+
+        req.setAttribute("error", "Unimplemented Method !");
+        responseToFailure(req, resp, new String[0], "/WEB-INF/pages/watched.jsp");
+    }
+
+    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/WEB-INF/pages/watched.jsp", deleteParamsToReturn)) return;
 
