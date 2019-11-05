@@ -31,7 +31,7 @@ public class MoviesServlet extends BaseHttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Pagination pagination = new Pagination().from(req);
 
-        req.setAttribute("movies", mediaDAO.findAllPaged(pagination.getNumber(), pagination.getSize()));
+        req.setAttribute("movies", mediaDAO.findAllWithJoinInfoPaged((Integer) req.getSession().getAttribute("user_id"), pagination.getNumber(), pagination.getSize()));
         req.setAttribute("totalEntries", mediaDAO.countAll());
 
         pagination.setOn(req);

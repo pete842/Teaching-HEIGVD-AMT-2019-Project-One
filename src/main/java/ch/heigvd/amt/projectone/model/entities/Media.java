@@ -16,4 +16,7 @@ public class Media {
     private Integer duration;
     private String mainGenre;
     private Integer rating;
+
+    private Boolean inserted;
+    private Boolean watched;
 }

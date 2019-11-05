@@ -21,18 +21,23 @@ public class MediaDAO implements MediaDAOLocal {
     private DataSource dataSource;
 
     @Override
-    public List<Media> findAllPaged(Integer pageNumber, Integer pageSize) {
+    public List<Media> findAllWithJoinInfoPaged(Integer userId, Integer pageNumber, Integer pageSize) {
         List<Media> result = new LinkedList<>();
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias LIMIT ? OFFSET ?");
-            ps.setInt(1, pageSize);
-            ps.setInt(2, (pageNumber - 1) * pageSize);
+
+            PreparedStatement ps = con.prepareStatement("SELECT medias.*, CASE WHEN media_user.id IS NULL THEN false ELSE true END AS inserted, CASE WHEN media_user.watched IS NULL THEN false ELSE true END AS watched FROM medias LEFT JOIN media_user ON media.id = media_user.media_id WHERE user_id IS NULL OR user_id = ? LIMIT ? OFFSET ?");
+            ps.setInt(1, userId);
+            ps.setInt(2, pageSize);
+            ps.setInt(3, (pageNumber - 1) * pageSize);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                result.add(SQLExtractor.extractMedia(rs));
+                Media media = SQLExtractor.extractMedia(rs);
+                result.add(media.toBuilder()
+                        .inserted(rs.getBoolean("inserted"))
+                        .watched(rs.getBoolean("watched")).build());
             }
 
             ps.close();
