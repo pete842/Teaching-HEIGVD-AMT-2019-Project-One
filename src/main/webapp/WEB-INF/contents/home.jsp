@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesToWatch / pageSize - 1}"/>
+<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesToWatch / pageSize}"/>
 
 <script type="text/javascript">
     let pageSize = '${pageSize}';
@@ -43,7 +43,7 @@
                 <th scope="col">Release date</th>
                 <th scope="col">Duration</th>
                 <th scope="col">Genre</th>
-                <th scope="col">Rating</th>
+                <th scope="col">IMBD</th>
             </tr>
             </thead>
             <tbody>
@@ -113,7 +113,7 @@
                     <c:when test="${nbPages > 7}">
                         <c:if test="${pageNumber > 3}">
                             <li class="page-item">
-                                <a class="page-link" href="home?pageNumber=1&amp;pageSize=${pageSize}#towatch">0</a>
+                                <a class="page-link" href="home?pageNumber=1&amp;pageSize=${pageSize}#towatch">1</a>
                             </li>
                             <li class="page-item">
                                 <p>...
@@ -121,14 +121,14 @@
                             </li>
                         </c:if>
                         <c:if test="${pageNumber < 4}">
-                            <c:forEach var="i" begin="0" end="${pageNumber + 1}">
+                            <c:forEach var="i" begin="1" end="${Math.max(pageNumber + 1, 3)}">
                                 <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
                                     <a class="page-link"
                                        href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
                                 </li>
                             </c:forEach>
                         </c:if>
-                        <c:if test="${pageNumber > 3 && pageNumber < nbPages - 3}">
+                        <c:if test="${pageNumber > 3 && pageNumber < nbPages - 2}">
                             <c:forEach var="i" begin="${pageNumber - 1}" end="${pageNumber + 1}">
                                 <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
                                     <a class="page-link"
@@ -138,7 +138,7 @@
                         </c:if>
 
 
-                        <c:if test="${pageNumber >= nbPages - 3}">
+                        <c:if test="${pageNumber >= nbPages - 2}">
                             <c:forEach var="i" begin="${Math.min(pageNumber - 1, nbPages - 2)}" end="${nbPages}">
                                 <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
                                     <a class="page-link"
@@ -146,7 +146,7 @@
                                 </li>
                             </c:forEach>
                         </c:if>
-                        <c:if test="${pageNumber < nbPages - 3}">
+                        <c:if test="${pageNumber < nbPages - 2}">
                             <li class="page-item">
                                 <p>...
                                 <p/>
@@ -158,14 +158,12 @@
                         </c:if>
                     </c:when>
                     <c:otherwise>
-                        <c:if test="${pageNumber < 3}">
-                            <c:forEach var="i" begin="0" end="${nbPages}">
-                                <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
-                                    <a class="page-link"
-                                       href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </c:if>
+                        <c:forEach var="i" begin="1" end="${nbPages}">
+                            <li class="page-item <c:if test="${pageNumber == i}">active</c:if> ">
+                                <a class="page-link"
+                                   href="home?pageNumber=${i}&amp;pageSize=${pageSize}#towatch">${i}</a>
+                            </li>
+                        </c:forEach>
                     </c:otherwise>
                 </c:choose>
                 <li class="page-item <c:if test="${pageNumber == nbPages}">disabled</c:if>">
