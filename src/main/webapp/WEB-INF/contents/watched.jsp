@@ -30,7 +30,7 @@
 </div>
 <div class="section">
     <div class="container">
-        <button class="btn btn-wd btn-primary btn-round float-right" type="button"><i class="fa fa-plus"></i> Add</button>
+        <button class="btn btn-wd btn-primary btn-round float-right" type="button" onclick="document.location.href='movies'"><i class="fa fa-plus"></i> Add</button>
         <h2 id="watched">Watched</h2>
         <table class="table table-hover">
             <thead>
@@ -68,8 +68,9 @@
                         <i class="fa fa-star"></i>
                     </td>
                     <td class="text-right">
-                        <form method="post" action="media_user?action=delete&back=/watched" id="delete${current.getMedia().getId()}">
+                        <form method="post" action="media_user?action=delete" id="delete${current.getMedia().getId()}">
                             <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
+                            <input type="hidden" name="back" value="watched?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                         </form>
                         <div class="dropdown">
                             <a class="text-black" style="cursor: pointer" onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i class="fa fa-trash "></i></a>

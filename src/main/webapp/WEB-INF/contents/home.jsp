@@ -30,7 +30,7 @@
 </div>
 <div class="section">
     <div class="container">
-        <button class="btn btn-wd btn-primary btn-round float-right"><i class="fa fa-plus"></i> Add</button>
+        <button class="btn btn-wd btn-primary btn-round float-right" onclick="document.location.href='movies'"><i class="fa fa-plus"></i> Add</button>
         <h2 id="towatch">To watch</h2>
         <table class="table table-hover">
             <thead>
@@ -48,7 +48,7 @@
                 <tr>
                     <td><c:out value="${current.getMedia().getTitle()}"/></td>
                     <td><fmt:formatDate value="${current.getMedia().getRelease()}"
-                                        pattern="MM.dd.yyyy HH:mm"/>
+                                        pattern="MM.dd.yyyy"/>
                     </td>
                     <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td>
@@ -64,8 +64,9 @@
                     </td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <form method="post" action="home?action=delete" id="delete${current.getMedia().getId()}">
+                            <form method="post" action="media_user?action=delete" id="delete${current.getMedia().getId()}">
                                 <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
+                                <input type="hidden" name="back" value="home?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                             </form>
                             <a class="text-black" id="dropdownMenuButton" href="#"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -106,9 +107,10 @@
                 </button>
                 <h4 class="title title-up">When did you watched it?<br>Was it good?</h4>
             </div>
-            <form>
+            <form method="post" action="media_user?action=put">
                 <div class="modal-body">
                     <input type="hidden" value="" name="media_id" id="watchedModalMediaId"/>
+                    <input type="hidden" name="back" value="home?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
 
                     <div class="form-group">
                         <label for="watchedDate">Date of seen</label>

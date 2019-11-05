@@ -27,7 +27,6 @@
 </div>
 <div class="section">
     <div class="container">
-        <button class="btn btn-wd btn-primary btn-round float-right"><i class="fa fa-plus"></i> Add</button>
         <h2 id="movies">Movies</h2>
         <table class="table table-hover">
             <thead>
@@ -45,7 +44,7 @@
                 <tr>
                     <td><c:out value="${current.getTitle()}"/></td>
                     <td><fmt:formatDate value="${current.getRelease()}"
-                                        pattern="MM.dd.yyyy HH:mm"/>
+                                        pattern="MM.dd.yyyy"/>
                     </td>
                     <td class="text-right"><c:out value="${current.getDuration()}"/>'</td>
                     <td>
@@ -60,10 +59,38 @@
                         <i class="fa fa-star"></i>
                     </td>
                     <td class="text-center">
-                        <a style="cursor:pointer"><i class="fa fa-eye"></i></a>
-                        <a style="cursor:pointer"><i class="fa fa-eye-slash"></i></a>
-                        <a style="cursor: pointer"><i class="fa fa-calendar-alt "></i></a>
-                        <a style="cursor: pointer"><i class="fa fa-calendar-check "></i></a>
+                        <c:choose>
+                            <c:when test="${watched}">
+                                <form method="post" action="media_user?action=delete" id="delete${current.getId()}">
+                                    <input type="hidden" name="media_id" value="${current.getId()}"/>
+                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
+                                </form>
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="Remove from watched list?"
+                                   onclick='document.getElementById("delete${current.getId()}").submit()'><i
+                                        class="fa fa-eye"></i></a>
+                            </c:when>
+                            <c:when test="${inserted}">
+                                <form method="post" action="media_user?action=put" id="watched${current.getId()}">
+                                    <input type="hidden" name="media_id" value="${current.getId()}"/>
+                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
+                                </form>
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You watched it?"
+                                   onclick='document.getElementById("watched${current.getId()}").submit()'><i
+                                        class="fa fa-eye-slash"></i><i class="fa fa-calendar-check"></i></a>
+                            </c:when>
+                            <c:otherwise>
+                                <form method="post" action="media_user?action=post" id="toWatch${current.getId()}">
+                                    <input type="hidden" name="media_id" value="${current.getId()}"/>
+                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
+                                </form>
+                                <a style="cursor: pointer" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You watched it?" data-toggle="modal"
+                                   data-target="#watchedModal" data-id="${current.getId()}"><i
+                                        class="fa fa-eye-slash"></i></a>
+                                <a style="cursor: pointer" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You want to watch it?"
+                                   onclick='document.getElementById("toWatch${current.getId()}").submit()'><i
+                                        class="fa fa-calendar-alt "></i></a>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>
@@ -80,7 +107,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel" aria-modal="true"
+<div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel"
+     aria-modal="true"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -90,9 +118,10 @@
                 </button>
                 <h4 class="title title-up">When did you watched it?<br>Was it good?</h4>
             </div>
-            <form>
+            <form action="media_user" method="post">
                 <div class="modal-body">
                     <input type="hidden" value="" name="media_id" id="watchedModalMediaId"/>
+                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
 
                     <div class="form-group">
                         <label for="watchedDate">Date of seen</label>
@@ -114,3 +143,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.setWatched').click(function () {
+            let id = $(this).data('id');
+            $("#watchedModalMediaId").attr("value", id);
+        });
+    });
+</script>

@@ -19,7 +19,7 @@
     <!-- CSS Files -->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/demo/demo.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/demo/demo.css" rel="stylesheet" />
 </head>
 <body class="login-page sidebar-collapse">
 <div id="wrapper">
