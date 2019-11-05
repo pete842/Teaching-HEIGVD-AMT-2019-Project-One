@@ -42,7 +42,7 @@ public class SQLExtractor {
                 .id(rs.getInt("id"))
                 .user(extractUser(rs, true))
                 .media(extractMedia(rs, true))
-                .rating(rs.getInt("rating"))
+                .rating(rs.getInt("personnal_rating"))
                 .watched(rs.getTimestamp("watched")).build();
     }
 }
