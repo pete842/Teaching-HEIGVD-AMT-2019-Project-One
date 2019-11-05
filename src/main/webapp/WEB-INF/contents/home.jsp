@@ -69,8 +69,7 @@
                     </td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <form method="post" action="home" id="delete${current.getMedia().getId()}">
-                                <input type="hidden" name="delete"/>
+                            <form method="post" action="home?action=delete" id="delete${current.getMedia().getId()}">
                                 <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
                             </form>
                             <a class="text-black" id="dropdownMenuButton" href="#"

@@ -26,7 +26,7 @@ public class MediaDAO implements MediaDAOLocal {
         try {
             Connection con = dataSource.getConnection();
 
-            PreparedStatement ps = con.prepareStatement("SELECT medias.*, CASE WHEN media_user.id IS NULL THEN false ELSE true END AS inserted, CASE WHEN media_user.watched IS NULL THEN false ELSE true END AS watched FROM medias LEFT JOIN media_user ON media.id = media_user.media_id WHERE user_id IS NULL OR user_id = ? LIMIT ? OFFSET ?");
+            PreparedStatement ps = con.prepareStatement("SELECT medias.*, CASE WHEN media_user.id IS NULL THEN false ELSE true END AS inserted, CASE WHEN media_user.watched IS NULL THEN false ELSE true END AS watched FROM medias LEFT JOIN media_user ON medias.id = media_user.media_id WHERE user_id IS NULL OR user_id = ? LIMIT ? OFFSET ?");
             ps.setInt(1, userId);
             ps.setInt(2, pageSize);
             ps.setInt(3, (pageNumber - 1) * pageSize);

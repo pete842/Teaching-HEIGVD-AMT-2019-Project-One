@@ -68,8 +68,7 @@
                         <i class="fa fa-star"></i>
                     </td>
                     <td class="text-right">
-                        <form method="post" action="watched" id="delete${current.getMedia().getId()}">
-                            <input type="hidden" name="delete"/>
+                        <form method="post" action="watched?action=delete" id="delete${current.getMedia().getId()}">
                             <input type="hidden" name="media_id" value="${current.getMedia().getId()}"/>
                         </form>
                         <div class="dropdown">

@@ -23,6 +23,8 @@ public class WatchedServlet extends BaseHttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Pagination pagination = new Pagination().from(req);
 
+        System.out.println(req.getHeader("referer"));
+
         Integer user_id = (Integer) req.getSession().getAttribute("user_id");
 
         req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pagination.getNumber(), pagination.getSize()));
@@ -36,20 +38,18 @@ public class WatchedServlet extends BaseHttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (doHTTPFormBetter(req, resp)) return;
+        if (doHTMLFormBetter(req, resp)) return;
 
         req.setAttribute("error", "Unimplemented Method !");
-        responseToFailure(req, resp, new String[0], "/WEB-INF/pages/watched.jsp");
+        doGet(req, resp);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/WEB-INF/pages/watched.jsp", deleteParamsToReturn)) return;
 
-        Pagination pagination = new Pagination().from(req);
-
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
-        Integer mediaId = (Integer) req.getAttribute("media_id");
+        Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
@@ -61,8 +61,6 @@ public class WatchedServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        pagination.setOn(req);
-
-        req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 }

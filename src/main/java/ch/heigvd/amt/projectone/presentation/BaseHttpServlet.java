@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class BaseHttpServlet extends HttpServlet {
-    protected boolean doHTTPFormBetter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected boolean doHTMLFormBetter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
         if (action == null) return false;

@@ -39,22 +39,20 @@ public class HomeServlet extends BaseHttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (doHTTPFormBetter(req, resp)) return;
+        if (doHTMLFormBetter(req, resp)) return;
 
         req.setAttribute("error", "Unimplemented Method !");
-        responseToFailure(req, resp, new String[0], "/WEB-INF/pages/home.jsp");
+        doGet(req, resp);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, putMandatoryParams, "/WEB-INF/pages/home.jsp", putParamsToReturn)) return;
 
-        Pagination pagination = new Pagination().from(req);
-
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
-        Integer mediaId = (Integer) req.getAttribute("media_id");
-        Integer rating = (Integer) req.getAttribute("rating");
-        Integer watched = (Integer) req.getAttribute("watched");
+        Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
+        Integer rating = Integer.parseInt(req.getParameter("rating"));
+        Integer watched = Integer.parseInt(req.getParameter("watched"));
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
@@ -68,19 +66,15 @@ public class HomeServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de mettre à jour un élément inexistant");
         }
 
-        pagination.setOn(req);
-
-        req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/WEB-INF/pages/home.jsp", deleteParamsToReturn)) return;
 
-        Pagination pagination = new Pagination().from(req);
-
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
-        Integer mediaId = (Integer) req.getAttribute("media_id");
+        Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
@@ -92,8 +86,6 @@ public class HomeServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
-        pagination.setOn(req);
-
-        req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 }
