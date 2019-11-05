@@ -35,15 +35,17 @@
 </div>
 <div class="section">
     <div class="container">
+        <button class="btn btn-wd btn-primary btn-round float-right"><i class="fa fa-plus"></i> Add</button>
         <h2 id="towatch">To watch</h2>
-        <table class="table">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Release date</th>
-                <th scope="col">Duration</th>
+                <th scope="col" class="text-right">Duration</th>
                 <th scope="col">Genre</th>
-                <th scope="col">IMBD</th>
+                <th scope="col" class="text-right">IMBG</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -65,6 +67,16 @@
                         <c:out value="${current.getMedia().getRating()}"/>
                         <i class="fa fa-star"></i>
                     </td>
+                    <td class="text-right">
+                        <div class="dropdown">
+                            <a class="text-black" id="dropdownMenuButton" href="#"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-edit"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#"><i class="fa fa-check"></i>Watched</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash"></i>Delete</a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -77,7 +89,7 @@
                                     + Math.min(${pageNumber}, Math.ceil(${totalEntriesWatched} / this.value))
                                     + "&pageSize="
                                     + this.value
-                                    + "#towatch"' >
+                                    + "#towatch"'>
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>

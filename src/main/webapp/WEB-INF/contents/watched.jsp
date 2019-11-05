@@ -30,6 +30,7 @@
 </div>
 <div class="section">
     <div class="container">
+        <button class="btn btn-wd btn-primary btn-round float-right"><i class="fa fa-plus"></i> Add</button>
         <h2 id="watched">Watched</h2>
         <table class="table table-hover">
             <thead>
@@ -40,6 +41,7 @@
                 <th scope="col">Genre</th>
                 <th scope="col" class="text-right">Rating</th>
                 <th scope="col" class="text-right">IMBD</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +66,16 @@
                     <td class="text-right">
                         <c:out value="${current.getMedia().getRating()}"/>
                         <i class="fa fa-star"></i>
+                    </td>
+                    <td class="text-right">
+                        <div class="dropdown">
+                            <a class="text-black" id="dropdownMenuButton" href="#"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-edit "></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#"><i class="fa fa-pen"></i>Edit</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash"></i>Delete</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </c:forEach>
