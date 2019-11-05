@@ -9,13 +9,10 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-header">Menu</a>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/movies">Movies list</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">One more separated link</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/home#towatch"><i>To Watch</i> list</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/watched#watched"><i>Watched</i> list</a>
             </div>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">

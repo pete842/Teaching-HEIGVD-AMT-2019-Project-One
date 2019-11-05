@@ -37,7 +37,7 @@
                 document.getElementById("selectPageSize").options[i].selected = true;
             </script>
         </li>
-        <li class="page-item <c:if test="${param.pageNumber == 0}">disabled</c:if>">
+        <li class="page-item <c:if test="${param.pageNumber <= 1}">disabled</c:if>">
             <a class="page-link " href="${param.preUrl}pageNumber=${param.pageNumber-1}&amp;pageSize=${param.pageSize}${param.postUrl}"><i
                     class="fa fa-angle-double-left" aria-hidden="true"></i></a>
         </li>
@@ -98,7 +98,7 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-        <li class="page-item <c:if test="${param.pageNumber == param.nbPages}">disabled</c:if>">
+        <li class="page-item <c:if test="${param.pageNumber >= param.nbPages}">disabled</c:if>">
             <a class="page-link " href="${param.preUrl}pageNumber=${param.pageNumber+1}&amp;pageSize=${param.pageSize}${param.postUrl}"><i
                     class="fa fa-angle-double-right" aria-hidden="true"></i></a>
         </li>

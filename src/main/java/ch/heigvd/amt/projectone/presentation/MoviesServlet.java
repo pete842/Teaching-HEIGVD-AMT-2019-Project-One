@@ -70,7 +70,7 @@ public class MoviesServlet extends BaseHttpServlet {
 
         pagination.setOn(req);
 
-        req.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 
     @Override

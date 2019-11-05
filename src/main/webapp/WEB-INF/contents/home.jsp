@@ -2,11 +2,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesToWatch / pageSize}"/>
 
-<script type="text/javascript">
-    let pageSize = '${pageSize}';
-    console.log(pageSize);
-</script>
-
 <div class="page-header page-header-small">
     <div class="page-header-image" data-parallax="true"
          style="background-image: url('${pageContext.request.contextPath}/assets/img/bg6.jpg');">
@@ -76,7 +71,9 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                     class="fa fa-edit"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#"><i class="fa fa-check"></i>Watched</a>
+                                <a  href="#" class="dropdown-item setWatched" data-toggle="modal" data-target="#watchedModal"
+                                   data-id="${current.getMedia().getId()}"><i
+                                        class="fa fa-check"></i>Watched</a>
                                 <a class="dropdown-item" style="cursor: pointer"
                                    onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i
                                         class="fa fa-trash "></i>Delete</a>
@@ -87,6 +84,7 @@
             </c:forEach>
             </tbody>
         </table>
+
         <jsp:include page="/WEB-INF/components/pagination.jsp">
             <jsp:param name="nbPages" value="${nbPages}"/>
             <jsp:param name="pageSize" value="${pageSize}"/>
@@ -97,4 +95,48 @@
         </jsp:include>
     </div>
 </div>
+
+<div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel" aria-modal="true"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+                <h4 class="title title-up">When did you watched it?<br>Was it good?</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input type="hidden" value="" name="media_id" id="watchedModalMediaId"/>
+
+                    <div class="form-group">
+                        <label for="watchedDate">Date of seen</label>
+                        <input type="text" id="watchedDate" class="form-control date-picker"
+                               data-datepicker-color="primary" name="watched">
+                    </div>
+                    <div class="form-group">
+                        <label for="watchedRating">Rating: <i class="fa fa-star"></i> <span id="ratingValue"
+                                                                                            class="w-25">50</span></label>
+                        <input type="range" class="form-control-range custom-range" id="watchedRating" min="0" max="100"
+                               value="50" name="rating" oninput='$("#ratingValue").text(this.value);'>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.setWatched').click(function () {
+            let id = $(this).data('id');
+            $("#watchedModalMediaId").attr("value", id);
+        });
+    });
+</script>
 
