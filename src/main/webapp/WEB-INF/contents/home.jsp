@@ -74,7 +74,7 @@
                 <li class="page-item">
                     <select class="form-control bg-default text-white" id="selectPageSize"
                             onchange='location.href="home?pageNumber="
-                                    + Math.min(${pageNumber}, ${totalEntriesWatched} / this.value - 1)
+                                    + Math.min(${pageNumber}, Math.ceil(${totalEntriesWatched} / this.value))
                                     + "&pageSize="
                                     + this.value
                                     + "#towatch"' >
