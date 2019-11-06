@@ -40,7 +40,7 @@ public class MediaUserServlet extends BaseHttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (doHTMLFormBetter(req, resp)) return;
 
-        if(! checkMandatoryParameters(req, resp, postMandatoryParams, "/WEB-INF/pages/home.jsp", postParamsToReturn)) return;
+        if(! checkMandatoryParameters(req, resp, postMandatoryParams, "/home", postParamsToReturn)) return;
 
         MediaUser mediaUser = MediaUser.builder()
                 .media(
@@ -49,9 +49,12 @@ public class MediaUserServlet extends BaseHttpServlet {
                 .user(
                         User.builder().id((Integer) req.getSession().getAttribute("user_id")).build()
                 )
-                .rating((req.getParameter("rating") != null) ? Integer.parseInt(req.getParameter("rating")) : null)
+                .rating(
+                        (req.getParameter("rating") != null && ! req.getParameter("rating").equals("")) ?
+                            Integer.parseInt(req.getParameter("rating"))
+                            : null)
                 .watched(
-                        (req.getParameter("watched") != null) ?
+                        (req.getParameter("watched") != null && ! req.getParameter("watched").equals("")) ?
                                 Timestamp.valueOf(LocalDate.parse(req.getParameter("watched"), DateTimeFormatter.ofPattern("MM/dd/yyyy")).atStartOfDay())
                                 : null
                 ).build();
@@ -67,19 +70,19 @@ public class MediaUserServlet extends BaseHttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if( ! checkMandatoryParameters(req, resp, putMandatoryParams, "/WEB-INF/pages/home.jsp", putParamsToReturn)) return;
+        if( ! checkMandatoryParameters(req, resp, putMandatoryParams, "/home", putParamsToReturn)) return;
 
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
         Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
         Integer rating = Integer.parseInt(req.getParameter("rating"));
-        Timestamp watched = Timestamp.valueOf(req.getParameter("watched"));
+        Timestamp watched = Timestamp.valueOf(LocalDate.parse(req.getParameter("watched"), DateTimeFormatter.ofPattern("MM/dd/yyyy")).atStartOfDay());
 
         System.out.println(watched);
 
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
         if (mediaUser != null) {
-            mediaUser = mediaUser.toBuilder().rating(rating).build();
+            mediaUser = mediaUser.toBuilder().watched(watched).rating(rating).build();
 
             if(! mediaUserDAO.update(mediaUser)) {
                 req.setAttribute("error", "Impossible de mettre à jour cette élément");
@@ -93,7 +96,7 @@ public class MediaUserServlet extends BaseHttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/WEB-INF/pages/home.jsp", deleteParamsToReturn)) return;
+        if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/home", deleteParamsToReturn)) return;
 
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
         Integer mediaId = Integer.parseInt(req.getParameter("media_id"));

@@ -112,7 +112,7 @@ public class MediaUserDAO implements MediaUserDAOLocal {
 
     @Override
     public MediaUser create(MediaUser mediaUser) throws SQLException {
-        MediaUser result = mediaUser;
+        MediaUser result = null;
 
         try {
             Connection con = dataSource.getConnection();
@@ -154,9 +154,9 @@ public class MediaUserDAO implements MediaUserDAOLocal {
         int row = 0;
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE FROM media_user SET `rating` = ?, `watched` = ? WHERE id = ?");
-            ps.setInt(3, mediaUser.getRating());
-            ps.setTimestamp(3, mediaUser.getWatched());
+            PreparedStatement ps = con.prepareStatement("UPDATE media_user SET `rating` = ?, `watched` = ? WHERE id = ?");
+            ps.setInt(1, mediaUser.getRating());
+            ps.setTimestamp(2, mediaUser.getWatched());
             ps.setInt(3, mediaUser.getId());
 
             row = ps.executeUpdate();

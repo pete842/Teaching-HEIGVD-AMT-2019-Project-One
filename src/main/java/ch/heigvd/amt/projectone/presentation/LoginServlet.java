@@ -16,7 +16,7 @@ public class LoginServlet extends BaseHttpServlet {
   private final static String[] postMandatoryParams = new String[]{"username", "password"};
 
   @EJB
-  private UserDAOLocal userDAO;
+  UserDAOLocal userDAO;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

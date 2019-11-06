@@ -65,6 +65,6 @@ public class BaseHttpServlet extends HttpServlet {
             req.setAttribute(param, req.getParameter(param));
         }
 
-        req.getRequestDispatcher(onFailureUrl).forward(req, resp);
+        forwardBack(req, resp, "/home");
     }
 }
