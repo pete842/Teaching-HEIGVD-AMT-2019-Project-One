@@ -45,7 +45,7 @@ class LoginServletTest {
     LoginServlet servlet;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         servlet = new LoginServlet();
         servlet.userDAO = usersDAO;
     }
@@ -99,7 +99,7 @@ class LoginServletTest {
         servlet.doPost(request, response);
         verify(usersDAO, atLeastOnce()).getUserByUsername("pete842");
         verify(request, atLeastOnce()).setAttribute(eq("error"), eq("Wrong username or password"));
-        verify(servlet, atLeastOnce()).responseToFailure(any(request.getClass()), any(response.getClass()), AdditionalMatchers.aryEq(new String[]{"username"}), eq("/WEB-INF/pages/login.jsp"));
+        verify(servlet, atLeastOnce()).responseToFailure(eq(request), eq(response), AdditionalMatchers.aryEq(new String[]{"username"}), eq("/WEB-INF/pages/login.jsp"));
     }
 
     @Test
