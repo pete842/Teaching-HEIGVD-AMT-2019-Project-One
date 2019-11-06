@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.page-header.page-header-small {
+  min-height: 40vh;
+}
+
 .typography-line {
   padding-left: 25%;
   margin-bottom: 35px;
