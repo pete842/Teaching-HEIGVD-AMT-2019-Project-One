@@ -2,6 +2,7 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.model.entities.User;
 import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
+import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 @RunWith(Arquillian.class)
+@MavenBuild
 @DeploymentParameters(testable = true)
 public class UserDAOTest {
 
