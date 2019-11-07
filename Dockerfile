@@ -57,9 +57,9 @@ RUN echo "=> Starting WildFly server" && \
 ADD projectone.war /opt/jboss/wildfly/standalone/deployments/
 
 # Expose http and admin ports
-EXPOSE 8080 9990
+EXPOSE 8080 9990 8787
 
 #echo "=> Restarting WildFly"
 # Set the default command to run on boot
 # This will boot WildFly in the standalone mode and bind to all interfaces
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "--debug", "*:8787"]

@@ -16,6 +16,7 @@ services:
     ports:
       - "8080:8080" # application
       - "9990:9990" # admin console
+      - "8787:8787" # debug interface
 
   db:
     container_name: "db"

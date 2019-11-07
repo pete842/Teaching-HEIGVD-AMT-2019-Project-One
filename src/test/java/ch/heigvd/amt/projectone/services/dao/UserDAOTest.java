@@ -4,6 +4,8 @@ import ch.heigvd.amt.projectone.model.entities.User;
 import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
 import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,12 +30,13 @@ public class UserDAOTest {
     }*/
 
     @Test
+    @Transactional(TransactionMode.ROLLBACK)
     public void findAll() throws SQLException {
         User john = User.builder()
-                .username("jdoe")
-                .firstName("John")
-                .lastName("Doe")
-                .email("john@doe.org")
+                .username("Bob")
+                .firstName("Moran")
+                .lastName("Bob")
+                .email("bob@moran.org")
                 .password("secret").build();
 
         User johnCreated = usersDao.create(john);
