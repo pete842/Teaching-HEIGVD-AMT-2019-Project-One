@@ -1,12 +1,10 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.model.entities.Pagination;
-import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.MediaDAOLocal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.AdditionalMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

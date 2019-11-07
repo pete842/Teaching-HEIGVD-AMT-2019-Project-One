@@ -1,9 +1,7 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.model.entities.Pagination;
-import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
