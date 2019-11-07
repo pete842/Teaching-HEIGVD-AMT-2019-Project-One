@@ -47,6 +47,7 @@ public class UserDAOTest {
 
     @Test
     public void getUserByUsername() {
+        assertEquals(1, 1);
     }
 
     @Test
