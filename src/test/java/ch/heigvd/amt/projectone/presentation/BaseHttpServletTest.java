@@ -1,16 +1,10 @@
 package ch.heigvd.amt.projectone.presentation;
 
-import ch.heigvd.amt.projectone.model.entities.User;
-import ch.heigvd.amt.projectone.services.dao.UserDAOLocal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.AdditionalMatchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sun.jvm.hotspot.utilities.Assert;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -79,7 +73,7 @@ class BaseHttpServletTest {
         when(request.getParameter("param1")).thenReturn("valid");
         when(request.getParameter("param2")).thenReturn(null);
 
-        servlet = Mockito.spy(servlet);
+        servlet = spy(servlet);
         doNothing().when(servlet).responseToFailure(any(HttpServletRequest.class), any(HttpServletResponse.class), any(String[].class), anyString());
 
         assertFalse(servlet.checkMandatoryParameters(request, response, params, "/error"));

@@ -13,14 +13,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/home")
 public class HomeServlet extends BaseHttpServlet {
-    private final static String[] putParamsToReturn = new String[]{"media_id", "rating", "watched"};
-    private final static String[] putMandatoryParams = putParamsToReturn;
-
-    private final static String[] deleteParamsToReturn = new String[]{"media_id"};
-    private final static String[] deleteMandatoryParams = deleteParamsToReturn;
-
     @EJB
-    private MediaUserDAOLocal mediaUserDAO;
+    MediaUserDAOLocal mediaUserDAO;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

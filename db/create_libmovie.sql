@@ -35,6 +35,7 @@ create table if not exists `media_user`
         `watched` timestamp null default null,
         primary key (`id`),
 		foreign key (`user_id`) references `users`(`id`),
-		foreign key (`media_id`) references `medias`(`id`)
+		foreign key (`media_id`) references `medias`(`id`),
+        constraint uq_association unique (`user_id`, `media_id`)
 	);
 
