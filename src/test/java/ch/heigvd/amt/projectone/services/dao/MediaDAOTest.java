@@ -5,6 +5,7 @@ import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
 import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
@@ -29,5 +30,9 @@ public class MediaDAOTest {
                 .release(new Timestamp(1504569600))
                 .rating(65)
                 .build();
+    }
+    @Test
+    public void faketestone(){
+        assert(true);
     }
 }

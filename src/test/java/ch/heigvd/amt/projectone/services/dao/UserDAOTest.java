@@ -35,7 +35,7 @@ public class UserDAOTest {
                 .lastName("Bob")
                 .email("bob@moran.org")
                 .password("secret")
-                .memberSince(new Timestamp(System.currentTimeMillis())).build();
+                .memberSince(new Timestamp(System.currentTimeMillis() % 1000 * 1000)).build();
     }
 
     @Test
@@ -72,8 +72,6 @@ public class UserDAOTest {
         User johnLoaded = usersDao.getUserByUsername(john.getUsername());
 
         assertEquals(johnCreated, johnLoaded);
-
-
     }
 
     @Test

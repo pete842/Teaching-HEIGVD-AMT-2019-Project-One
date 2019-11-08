@@ -54,7 +54,7 @@ RUN echo "=> Starting WildFly server" && \
       rm -f /tmp/*.jar
 
 # Add project to deployments folder
-ADD ./target/projectone.war /opt/jboss/wildfly/standalone/deployments/
+ADD ./projectone.war /opt/jboss/wildfly/standalone/deployments/
 
 # Expose http and admin ports
 EXPOSE 8080 9990 8787
