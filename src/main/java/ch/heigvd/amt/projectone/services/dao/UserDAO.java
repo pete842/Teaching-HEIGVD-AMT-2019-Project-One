@@ -6,10 +6,7 @@ import ch.heigvd.amt.projectone.services.dao.extractor.SQLExtractor;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -72,12 +69,13 @@ public class UserDAO implements UserDAOLocal {
 
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO users (username, password, email, firstname, lastname) value (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users (username, password, email, firstname, lastname, member_since) value (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getFirstName());
             ps.setString(5, user.getLastName());
+            ps.setTimestamp(6, user.getMemberSince());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();

@@ -1,7 +1,13 @@
-.alert {
-  position: absolute;
+.alert.alert-danger {
+  position: fixed!important;
   top:0;
   width: 100%;
+  z-index: 2000;
+  background-color(rgb(255, 54, 54))!important;
+}
+
+.page-header.page-header-small {
+  min-height: 40vh;
 }
 
 .typography-line {

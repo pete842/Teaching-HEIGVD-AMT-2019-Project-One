@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container">
         <div class="dropdown button-dropdown">
-            <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
                 <span class="button-bar"></span>
                 <span class="button-bar"></span>
                 <span class="button-bar"></span>
@@ -11,8 +11,8 @@
                 <a class="dropdown-header">Menu</a>
                 <a class="dropdown-item" href="${pageContext.request.contextPath}/movies">Movies list</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/home#towatch"><i>To Watch</i> list</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/watched#watched"><i>Watched</i> list</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/home"><i>To Watch</i> list</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/watched"><i>Watched</i> list</a>
             </div>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">

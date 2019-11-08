@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntriesToWatch / pageSize}"/>
+<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${Math.ceil(totalEntriesWatched / pageSize)}"/>
 
 <div class="page-header page-header-small">
     <div class="page-header-image" data-parallax="true"
@@ -11,14 +11,14 @@
             <h1 class="title">Welcome to your media library</h1>
             <h3 class="title">${sessionScope.firstname} ${sessionScope.lastname}</h3>
             <div class="content">
-                <a href="home#towatch" class="btn btn-outline-secondary">
+                <a href="home" class="btn btn-outline-secondary">
                     <div class="social-description">
                         <h2>${totalEntriesToWatch}</h2>
                         <p>To Watch</p>
                     </div>
                 </a>
 
-                <a href="watched#watched" class="btn btn-primary disabled">
+                <a href="watched" class="btn btn-primary disabled">
                     <div class="social-description">
                         <h2>${totalEntriesWatched}</h2>
                         <p>Watched</p>
@@ -86,7 +86,7 @@
             <jsp:param name="pageNumber" value="${pageNumber}"/>
             <jsp:param name="totalEntries" value="${totalEntriesWatched}"/>
             <jsp:param name="preUrl" value="watched?"/>
-            <jsp:param name="postUrl" value="#watched"/>
+            <jsp:param name="postUrl" value=""/>
         </jsp:include>
     </div>
 </div>

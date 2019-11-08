@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${totalEntries / pageSize}"/>
+<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${Math.ceil(totalEntries / pageSize)}"/>
 
 <script type="text/javascript">
     let pageSize = '${pageSize}';
@@ -15,7 +15,7 @@
         <div class="container">
             <h1 class="title">Media library</h1>
             <div class="content">
-                <a href="home#towatch" class="btn btn-primary disabled">
+                <a href="home" class="btn btn-primary disabled">
                     <div class="social-description">
                         <h2>${totalEntries}</h2>
                         <p>Movies</p>
@@ -99,7 +99,7 @@
             <jsp:param name="pageNumber" value="${pageNumber}"/>
             <jsp:param name="totalEntries" value="${totalEntries}"/>
             <jsp:param name="preUrl" value="movies?"/>
-            <jsp:param name="postUrl" value="#movies"/>
+            <jsp:param name="postUrl" value=""/>
         </jsp:include>
     </div>
 </div>
