@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @WebServlet(urlPatterns = "/registration")
 public class RegistrationServlet extends BaseHttpServlet {
@@ -43,6 +44,7 @@ public class RegistrationServlet extends BaseHttpServlet {
             .firstName(req.getParameter("firstname"))
             .lastName(req.getParameter("lastname"))
             .password(password)
+            .memberSince(new Timestamp(System.currentTimeMillis()))
             .build();
 
     try {
