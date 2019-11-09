@@ -34,7 +34,7 @@ public class MediaUserServlet extends BaseHttpServlet {
     private final static String[] deleteMandatoryParams = deleteParamsToReturn;
 
     @EJB
-    private MediaUserDAOLocal mediaUserDAO;
+    MediaUserDAOLocal mediaUserDAO;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

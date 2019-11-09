@@ -39,9 +39,6 @@ class RegistrationServletTest {
     User user;
 
     @Mock
-    User.UserBuilder userBuilder;
-
-    @Mock
     RequestDispatcher requestDispatcher;
 
     RegistrationServlet servlet;
