@@ -75,9 +75,11 @@ public class UserDAOTest {
     }
 
     @Test
-    public void findAllShouldBeEquals() throws SQLException {
+    @Transactional(TransactionMode.ROLLBACK)
+    public void findAllShouldContainsANewlyCreatedUser() throws SQLException {
+        User johnCreated = usersDao.create(john);
         List<User> users = usersDao.findAll();
 
-        assertEquals(users.size(), 3);
+        assertTrue(users.contains(johnCreated));
     }
 }
