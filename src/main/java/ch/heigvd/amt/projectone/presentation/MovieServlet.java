@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/movies")
+@WebServlet(urlPatterns = "/movie")
 public class MovieServlet extends BaseHttpServlet {
     private final static String[] getParamsToReturn = new String[0];
     private final static String[] getMandatoryParams = new String[]{"media_id"};

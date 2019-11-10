@@ -35,7 +35,9 @@ public class SQLExtractor {
                 .release(rs.getTimestamp("release"))
                 .duration(rs.getInt("duration"))
                 .mainGenre(rs.getString("main_genre"))
-                .rating(rs.getInt("rating")).build();
+                .rating(rs.getInt("rating"))
+                .watched(false)
+                .inserted(false).build();
     }
 
     public static MediaUser extractMediaUser(ResultSet rs) throws SQLException {

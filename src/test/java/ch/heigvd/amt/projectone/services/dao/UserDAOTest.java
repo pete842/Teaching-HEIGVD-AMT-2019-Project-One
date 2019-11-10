@@ -69,7 +69,7 @@ public class UserDAOTest {
     @Transactional(TransactionMode.ROLLBACK)
     public void getUserByUsernameUserShouldBeEquals() throws SQLException {
         User johnCreated = usersDao.create(john);
-        User johnLoaded = usersDao.getUserByUsername(john.getUsername());
+        User johnLoaded = usersDao.findByUsername(john.getUsername());
 
         assertEquals(johnCreated, johnLoaded);
     }
