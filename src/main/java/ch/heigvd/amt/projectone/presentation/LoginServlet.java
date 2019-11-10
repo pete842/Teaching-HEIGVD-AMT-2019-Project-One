@@ -31,7 +31,7 @@ public class LoginServlet extends BaseHttpServlet {
     String password = req.getParameter("password");
 
 
-    User user = userDAO.getUserByUsername(username);
+    User user = userDAO.findByUsername(username);
     if (user == null || !user.getPassword().equals(password)) {
       req.setAttribute("error", "Wrong username or password");
       responseToFailure(req, resp, postParamsToReturn, "/WEB-INF/pages/login.jsp");

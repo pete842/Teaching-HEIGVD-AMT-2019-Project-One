@@ -40,7 +40,7 @@ public class UserDAO implements UserDAOLocal {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User findByUsername(String username) {
         User result = null;
 
         try {
