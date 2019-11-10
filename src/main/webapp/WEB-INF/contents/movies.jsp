@@ -60,7 +60,7 @@
                     </td>
                     <td class="text-center">
                         <c:choose>
-                            <c:when test="${watched}">
+                            <c:when test="${current.watched}">
                                 <form method="post" action="media_user" id="delete${current.getId()}">
                                     <input type="hidden" name="media_id" value="${current.getId()}"/>
                                     <input type="hidden" name="action" value="delete"/>
@@ -70,7 +70,7 @@
                                    onclick='document.getElementById("delete${current.getId()}").submit()'><i
                                         class="fa fa-eye"></i></a>
                             </c:when>
-                            <c:when test="${inserted}">
+                            <c:when test="${current.inserted}">
                                 <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?" data-toggle="modal"
                                    data-target="#watchedModal" data-id="${current.getId()}" data-action="put"><i
                                         class="fa fa-eye-slash"></i></a>
