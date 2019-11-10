@@ -9,7 +9,7 @@ import java.util.List;
 @Local
 public interface UserDAOLocal {
     public List<User> findAll();
-    public User getUserByUsername(String username);
+    public User findByUsername(String username);
 
     public User create(User user) throws SQLException;
 }

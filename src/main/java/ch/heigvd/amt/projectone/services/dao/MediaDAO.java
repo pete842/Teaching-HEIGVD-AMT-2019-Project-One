@@ -69,4 +69,28 @@ public class MediaDAO implements MediaDAOLocal {
 
         return result;
     }
+
+    @Override
+    public Media findById(int media_id) {
+        Media result = null;
+
+        try {
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM medias WHERE id = ?");
+            ps.setInt(1, media_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                result = SQLExtractor.extractMedia(rs);
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
+    }
 }

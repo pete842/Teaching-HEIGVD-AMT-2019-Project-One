@@ -8,4 +8,6 @@ import java.util.List;
 public interface MediaDAOLocal {
     public List<Media> findAllWithJoinInfoPaged(Integer user_id, Integer pageNumber, Integer pageSize);
     public Integer countAll();
+
+    public Media findById(int media_id);
 }

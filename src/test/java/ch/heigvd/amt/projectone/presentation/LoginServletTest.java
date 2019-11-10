@@ -59,7 +59,7 @@ class LoginServletTest {
     }
 
     public void beforePost() {
-        when(usersDAO.getUserByUsername("pete842")).thenReturn(user);
+        when(usersDAO.findByUsername("pete842")).thenReturn(user);
     }
 
     @Test
@@ -71,7 +71,7 @@ class LoginServletTest {
         useGoodPassword();
 
         servlet.doPost(request, response);
-        verify(usersDAO, atLeastOnce()).getUserByUsername("pete842");
+        verify(usersDAO, atLeastOnce()).findByUsername("pete842");
     }
 
     @Test
@@ -83,7 +83,7 @@ class LoginServletTest {
         useGoodPassword();
 
         servlet.doPost(request, response);
-        verify(usersDAO, atLeastOnce()).getUserByUsername("pete842");
+        verify(usersDAO, atLeastOnce()).findByUsername("pete842");
         verify(response, atLeastOnce()).sendRedirect(any());
     }
 
@@ -97,14 +97,14 @@ class LoginServletTest {
         blockResponseToFailure();
 
         servlet.doPost(request, response);
-        verify(usersDAO, atLeastOnce()).getUserByUsername("pete842");
+        verify(usersDAO, atLeastOnce()).findByUsername("pete842");
         verify(request, atLeastOnce()).setAttribute(eq("error"), eq("Wrong username or password"));
         verify(servlet, atLeastOnce()).responseToFailure(eq(request), eq(response), AdditionalMatchers.aryEq(new String[]{"username"}), eq("/WEB-INF/pages/login.jsp"));
     }
 
     @Test
     void doPostSouldRefusLoginWrongUsername() throws ServletException, IOException {
-        when(usersDAO.getUserByUsername(AdditionalMatchers.not(eq("pete842")))).thenReturn(null);
+        when(usersDAO.findByUsername(AdditionalMatchers.not(eq("pete842")))).thenReturn(null);
 
         useBadUsername();
         useGoodPassword();
@@ -112,7 +112,7 @@ class LoginServletTest {
         blockResponseToFailure();
 
         servlet.doPost(request, response);
-        verify(usersDAO, atLeastOnce()).getUserByUsername("pete");
+        verify(usersDAO, atLeastOnce()).findByUsername("pete");
         verify(request, atLeastOnce()).setAttribute(eq("error"), eq("Wrong username or password"));
         verify(servlet, atLeastOnce()).responseToFailure(any(request.getClass()), any(response.getClass()), AdditionalMatchers.aryEq(new String[]{"username"}), eq("/WEB-INF/pages/login.jsp"));
     }
