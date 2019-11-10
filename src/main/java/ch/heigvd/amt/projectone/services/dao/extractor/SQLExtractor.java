@@ -6,6 +6,7 @@ import ch.heigvd.amt.projectone.model.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class SQLExtractor {
     public static User extractUser(ResultSet rs) throws SQLException {
@@ -38,11 +39,12 @@ public class SQLExtractor {
     }
 
     public static MediaUser extractMediaUser(ResultSet rs) throws SQLException {
+        Timestamp watched = rs.getTimestamp("watched");
         return MediaUser.builder()
                 .id(rs.getInt("id"))
                 .user(extractUser(rs, true))
                 .media(extractMedia(rs, true))
-                .rating(rs.getInt("personnal_rating"))
-                .watched(rs.getTimestamp("watched")).build();
+                .rating(watched == null ? null : rs.getInt("personnal_rating"))
+                .watched(watched).build();
     }
 }
