@@ -37,7 +37,8 @@
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Genres</th>
-                <th scope="col" class="text-right">Release date</th>
+                <th scope="col" class="text-right">Watched</th>
+                <th scope="col" class="text-right">Release</th>
                 <th scope="col" class="text-right">Duration</th>
                 <th scope="col" class="text-right">Rating</th>
                 <th scope="col" class="text-right">IMBD</th>
@@ -56,8 +57,11 @@
                         </span>
                         </c:forTokens>
                     </td>
+                    <td class="text-right"><fmt:formatDate value="${current.getWatched()}"
+                                                           pattern="MM.dd.yyyy"/>
+                    </td>
                     <td class="text-right"><fmt:formatDate value="${current.getMedia().getRelease()}"
-                                        pattern="MM.dd.yyyy"/>
+                                                           pattern="MM.dd.yyyy"/>
                     </td>
                     <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td class="text-right">
