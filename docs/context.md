@@ -16,6 +16,14 @@ Les trois types d'entités sont relativement simple :
 - MediaUser {id, user_id, media_id, rating, watched}
 - Media {id, title, release, duration, main_genre, rating}
 
+Les points importants sont la différence dans la table de jointure `MediaUser`, on fait la différence entre un média `toWatch` et `Watched` par la présence des champs `watched` et `rating`.
+Ces champs sont dans l'ordre : une date de visionnage et une évaluation personnel du média.
+Dans le cas de `Media` le champ `main_genre` contient un ensemble de genre (ex. Triller, Action) sous forme d'une String.
 
+## Scoped
+
+Nous avons décidé de `scoped` uniquement les informations concernants la jointure permettant à un utilisation de maintenir une librairie personnel de média.
+Le `CRUD` se trouve sur cette table de jointure qui permet lecture, creation d'un `watched` ou d'un `toWatch`, mise à jour d'un `toWatch` à `watched` et la suppression d'un `watched`.
+Le passage d'un `toWatch` à `watched` se fait par le renseignement des champs `watched` et `rating`.
 
 [Retour](../README.md)
