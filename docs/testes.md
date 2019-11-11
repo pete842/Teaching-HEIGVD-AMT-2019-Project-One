@@ -39,4 +39,23 @@ Il va sans dire que cet environnement de test doit aussi être capable de résou
 
 Arquillian répond à tout ces critères et plus encore, c'est pourquoi est utilisé dans ce projet afin de tester les *DAOs* (objets d'accès aux données, en français).
 
+Grâce à l'annotations `@Transactional(TransactionMode.ROLLBACK)`, il est possible d'indiquer à Arquillian de restituer la base dans l'état précédant le test en question.
+Ainsi, un ajout sera supprimé, une modification inversé et un élément supprimé sera réajouté.
+
+L'annotations `@EJB` quant à elle permet l'injection d'une `bean` et la résolution de ses `resources`.
+Elle sera donc située au niveau de la déclaration d'un objet nécessitant ce comportement, tel que les `DAOs`.
+
+Enfin, les annotations `@Before` et `@After` permette respectivement de mettre en place une fonction de *setup* et une fonction de *teardown*.
+
+### Avis
+
+Pour être parfaitement honnête, Arquillian nous a posé de grande difficulté de mise en place.
+En effet, il s'est avéré plus que critique de trouver l'ensemble des modules à importer de façon à pouvoir faire fonctionner correctement ce *framework* de test.
+
+Cependant, une fois en possession d'un environnement stable et fonctionnel, force nous est de constater qu'Arquillian est un outil infiniment puissant, pour la simple et bonne raison qu'il représente plus qu'un système de mocking.
+Il s'agit en effet d'un logiciel très (trop) puissant qui pourra être configurer afin de réaliser **n'importe quel test** d'intégration sur votre application web.
+
+Le seul défault majeur relatif à l'utilisation d'Arquillian résidera dans la lenteur du déploiement et d'exécution des tests.
+
+
 [Retour](../README.md)
