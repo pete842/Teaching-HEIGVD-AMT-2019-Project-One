@@ -8,13 +8,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = "/*")
 public class EncodingUtf8Filter implements Filter {
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
                          FilterChain chain) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         chain.doFilter(request, response);
     }
 }
