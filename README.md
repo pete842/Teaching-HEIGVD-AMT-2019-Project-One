@@ -4,8 +4,20 @@
 
 ## Authors
 
-- Pierre Kohler <<pierre.kohler@heig-vd.ch>>
-- Jonathan Zaehringer <<jonathan.zaehringer@heig-vd.ch>>
+- Pierre Kohler <pierre.kohler@heig-vd.ch>
+- Jonathan Zaehringer <jonathan.zaehringer@heig-vd.ch>
 
+## How to ...
 
+### Deploy
+
+### Test
+
+## Documentation
+
+[Contexte](docs/context.md)
+[Implémentation](docs/implement.md)
+[Testes](docs/testes.md)
+[Performances](docs/performance.md)
+[Bugs connus](docs/bugs.md)
 
