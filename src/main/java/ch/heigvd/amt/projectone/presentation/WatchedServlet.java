@@ -1,15 +1,12 @@
 package ch.heigvd.amt.projectone.presentation;
 
-import ch.heigvd.amt.projectone.model.entities.MediaUser;
 import ch.heigvd.amt.projectone.model.entities.Pagination;
 import ch.heigvd.amt.projectone.services.dao.MediaUserDAOLocal;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 

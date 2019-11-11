@@ -1,7 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.model.entities.Media;
-import ch.heigvd.amt.projectone.model.entities.Pagination;
 import ch.heigvd.amt.projectone.services.dao.MediaDAOLocal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 
