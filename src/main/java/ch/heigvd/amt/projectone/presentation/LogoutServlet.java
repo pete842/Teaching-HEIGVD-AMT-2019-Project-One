@@ -14,6 +14,6 @@ public class LogoutServlet extends BaseHttpServlet {
     req.getSession().invalidate();
 
     req.setAttribute("success", "Successful logout !");
-    req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+    req.getRequestDispatcher("/login").forward(req, resp);
   }
 }
