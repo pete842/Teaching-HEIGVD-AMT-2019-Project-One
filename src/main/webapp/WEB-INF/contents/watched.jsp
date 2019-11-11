@@ -42,6 +42,7 @@
                 <th scope="col" class="text-right">Rating</th>
                 <th scope="col" class="text-right">IMBD</th>
                 <th scope="col"></th>
+                <th scope="col" class="text-center"><i class="fa fa-search"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -75,6 +76,11 @@
                         <div class="dropdown">
                             <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="Remove from the list?" style="cursor: pointer" onclick='document.getElementById("delete" + ${current.getMedia().getId()}).submit()'><i class="fa fa-trash "></i></a>
                         </div>
+                    </td>
+                    <td scope="col" class="text-center">
+                        <a href="movie?media_id=${current.getMedia().getId()}&amp;back=watched?pageNumber=${pageNumber}&amp;pageSize=${pageSize}" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="More info">
+                            <i class="fa fa-search"></i>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

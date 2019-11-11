@@ -163,7 +163,7 @@ public class MediaUserDAOTest {
 
         int pageSize = 100;
         int pageNumber = 0;
-        int lastPage = (int) Math.ceil(count / pageSize);
+        int lastPage = (int) Math.ceil(count / pageSize) + 1;
         int lastPageSize = count % pageSize;
         if(lastPageSize == 0)
             lastPageSize = pageSize;

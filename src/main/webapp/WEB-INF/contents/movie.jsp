@@ -34,7 +34,7 @@
             </p>
 
 
-            <a onclick="goBack()" class="btn btn-primary">Back</a>
+            <a href="${back}" class="btn btn-primary">Back</a>
         </div>
     </div>
 </div>

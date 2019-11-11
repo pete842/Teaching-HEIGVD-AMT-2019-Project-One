@@ -41,6 +41,7 @@
                 <th scope="col">Genre</th>
                 <th scope="col" class="text-right">IMBG</th>
                 <th scope="col"></th>
+                <th scope="col" class="text-center"><i class="fa fa-search"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -80,6 +81,11 @@
                                         class="fa fa-trash "></i>Delete</a>
                             </div>
                         </div>
+                    </td>
+                    <td scope="col" class="text-center">
+                        <a href="movie?media_id=${current.getMedia().getId()}&amp;back=home?pageNumber=${pageNumber}&amp;pageSize=${pageSize}" class="btn btn-sm btn-neutral m-0 p-1 text-black" title="More info">
+                            <i class="fa fa-search"></i>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

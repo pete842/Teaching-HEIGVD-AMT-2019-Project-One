@@ -37,6 +37,7 @@
                 <th scope="col">Genre</th>
                 <th scope="col" class="text-center">IMBG</th>
                 <th scope="col" class="text-center">Seen?</th>
+                <th scope="col" class="text-center"><i class="fa fa-search"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -64,30 +65,45 @@
                                 <form method="post" action="media_user" id="delete${current.getId()}">
                                     <input type="hidden" name="media_id" value="${current.getId()}"/>
                                     <input type="hidden" name="action" value="delete"/>
-                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
+                                    <input type="hidden" name="back"
+                                           value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                                 </form>
                                 <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="Remove from watched list?"
                                    onclick='document.getElementById("delete${current.getId()}").submit()'><i
                                         class="fa fa-eye"></i></a>
                             </c:when>
                             <c:when test="${current.getInserted()}">
-                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?" data-toggle="modal"
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?"
+                                   data-toggle="modal"
                                    data-target="#watchedModal" data-id="${current.getId()}" data-action="put"><i
                                         class="fa fa-eye-slash"></i></a>
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black disabled" title="You already want to watch it.">
+                                    <i class="fa fa-calendar-check "></i>
+                                </a>
                             </c:when>
                             <c:otherwise>
                                 <form method="post" action="media_user" id="toWatch${current.getId()}">
                                     <input type="hidden" name="media_id" value="${current.getId()}"/>
-                                    <input type="hidden" name="back" value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
+                                    <input type="hidden" name="back"
+                                           value="movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"/>
                                 </form>
-                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?" data-toggle="modal"
+                                <a class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="You watched it?"
+                                   data-toggle="modal"
                                    data-target="#watchedModal" data-id="${current.getId()}" data-action="post"><i
-                                        class="fa fa-eye-slash"></i></a>
+                                        class="fa fa-eye-slash"></i>
+                                </a>
                                 <a class="btn btn-sm btn-neutral m-0 p-1 text-black" title="You want to watch it?"
-                                   onclick='document.getElementById("toWatch${current.getId()}").submit()'><i
-                                        class="fa fa-calendar-alt "></i></a>
+                                   onclick='document.getElementById("toWatch${current.getId()}").submit()'>
+                                    <i class="fa fa-calendar-alt "></i>
+                                </a>
                             </c:otherwise>
                         </c:choose>
+                    </td>
+                    <td scope="col" class="text-center">
+                        <a href="movie?media_id=${current.getId()}&amp;back=movies?pageNumber=${pageNumber}&amp;pageSize=${pageSize}"
+                           class="btn btn-sm btn-neutral m-0 p-1 text-black setWatched" title="More info">
+                            <i class="fa fa-search"></i>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
