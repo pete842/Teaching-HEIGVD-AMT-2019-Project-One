@@ -35,6 +35,11 @@ public class Pagination {
         return this;
     }
 
+    public void setOn(HttpServletRequest req, Integer totalEntries) {
+        this.setOn(req);
+        req.setAttribute("nbPages", ((Double)Math.ceil(totalEntries / number)).toString());
+    }
+
     public void setOn(HttpServletRequest req) {
         req.setAttribute("pageSize", size.toString());
         req.setAttribute("pageNumber", number.toString());

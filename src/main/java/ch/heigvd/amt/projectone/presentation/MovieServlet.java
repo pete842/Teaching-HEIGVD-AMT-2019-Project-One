@@ -25,7 +25,6 @@ public class MovieServlet extends BaseHttpServlet {
         Pagination pagination = new Pagination().from(req);
 
         req.setAttribute("movie", mediaDAO.findById(Integer.parseInt(req.getParameter("media_id"))));
-        req.setAttribute("totalEntries", mediaDAO.countAll());
         req.setAttribute("back", req.getParameter("back"));
 
         pagination.setOn(req);

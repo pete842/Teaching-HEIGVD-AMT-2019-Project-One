@@ -23,10 +23,12 @@ public class HomeServlet extends BaseHttpServlet {
         Integer user_id = (Integer) req.getSession().getAttribute("user_id");
 
         req.setAttribute("toWatch", mediaUserDAO.findAllToWatchByUserPaged(user_id, pagination.getNumber(), pagination.getSize()));
-        req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
+
+        Integer totalEntriesToWatch = mediaUserDAO.countAllToWatchByUser(user_id);
+        req.setAttribute("totalEntriesToWatch", totalEntriesToWatch);
         req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
 
-        pagination.setOn(req);
+        pagination.setOn(req, totalEntriesToWatch);
 
         req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     }

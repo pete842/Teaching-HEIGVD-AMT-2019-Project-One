@@ -23,9 +23,10 @@ public class WatchedServlet extends BaseHttpServlet {
 
         req.setAttribute("watched", mediaUserDAO.findAllWatchedByUserPaged(user_id, pagination.getNumber(), pagination.getSize()));
         req.setAttribute("totalEntriesToWatch", mediaUserDAO.countAllToWatchByUser(user_id));
-        req.setAttribute("totalEntriesWatched", mediaUserDAO.countAllWatchedByUser(user_id));
+        Integer totalEntriesWatched = mediaUserDAO.countAllWatchedByUser(user_id);
+        req.setAttribute("totalEntriesWatched", totalEntriesWatched);
 
-        pagination.setOn(req);
+        pagination.setOn(req, totalEntriesWatched);
 
         req.getRequestDispatcher("/WEB-INF/pages/watched.jsp").forward(req, resp);
     }

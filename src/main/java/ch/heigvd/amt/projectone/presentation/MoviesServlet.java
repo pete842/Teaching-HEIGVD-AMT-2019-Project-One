@@ -20,9 +20,10 @@ public class MoviesServlet extends BaseHttpServlet {
         Pagination pagination = new Pagination().from(req);
 
         req.setAttribute("movies", mediaDAO.findAllWithJoinInfoPaged((Integer) req.getSession().getAttribute("user_id"), pagination.getNumber(), pagination.getSize()));
-        req.setAttribute("totalEntries", mediaDAO.countAll());
+        Integer totalEntries = mediaDAO.countAll();
+        req.setAttribute("totalEntries", totalEntries);
 
-        pagination.setOn(req);
+        pagination.setOn(req, totalEntries);
 
         req.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(req, resp);
     }
