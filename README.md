@@ -15,9 +15,9 @@
 
 ## Documentation
 
-[Contexte](docs/context.md)
-[Implémentation](docs/implement.md)
-[Testes](docs/testes.md)
-[Performances](docs/performance.md)
-[Bugs connus](docs/bugs.md)
+- [Contexte](docs/context.md)
+- [Implémentation](docs/implement.md)
+- [Testes](docs/testes.md)
+- [Performances](docs/performance.md)
+- [Bugs connus](docs/bugs.md)
 
