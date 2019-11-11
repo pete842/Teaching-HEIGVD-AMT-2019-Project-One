@@ -37,7 +37,7 @@ public class Pagination {
 
     public void setOn(HttpServletRequest req, Integer totalEntries) {
         this.setOn(req);
-        req.setAttribute("nbPages", ((Double)Math.ceil(totalEntries / number)).toString());
+        req.setAttribute("nbPages", String.valueOf(((Double)Math.ceil(totalEntries / number)).intValue()));
     }
 
     public void setOn(HttpServletRequest req) {
