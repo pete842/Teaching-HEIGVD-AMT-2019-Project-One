@@ -35,7 +35,7 @@ class LogoutServletTest {
     public void setup() {
         servlet = new LogoutServlet();
 
-        when(request.getRequestDispatcher("/WEB-INF/pages/login.jsp")).thenReturn(requestDispatcher);
+        when(request.getRequestDispatcher("/login")).thenReturn(requestDispatcher);
 
         when(request.getSession()).thenReturn(httpSession);
         doNothing().when(httpSession).invalidate();

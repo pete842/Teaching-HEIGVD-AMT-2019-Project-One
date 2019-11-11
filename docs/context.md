@@ -10,5 +10,12 @@ Cependant, il serait très simple de pouvoir fournir un ensemble de médias diff
 
 ## Entities
 
+Les trois types d'entités sont relativement simple :
+
+- Users {id, username, firstname, lastname, email, member_since, password}
+- MediaUser {id, user_id, media_id, rating, watched}
+- Media {id, title, release, duration, main_genre, rating}
+
+
 
 [Retour](../README.md)

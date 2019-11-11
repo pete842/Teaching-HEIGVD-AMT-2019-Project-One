@@ -122,7 +122,7 @@ class LoginServletTest {
     void useGoodUsername() { when(request.getParameter("username")).thenReturn("pete842"); }
     void useBadUsername() { when(request.getParameter("username")).thenReturn("pete"); }
 
-    void useUserModel() { when(user.getPassword()).thenReturn("totem"); }
+    void useUserModel() { when(user.getPassword()).thenReturn("$31$5$8f91zmgQBh7LUAM1-29me1KhHFQJekxK1872YYzNO2s"); }
 
     void useSession() {
         when(request.getSession()).thenReturn(httpSession);
