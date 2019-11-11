@@ -36,10 +36,10 @@
             <thead>
             <tr>
                 <th scope="col">Title</th>
+                <th scope="col">Genre</th>
                 <th scope="col">Release date</th>
                 <th scope="col" class="text-right">Duration</th>
-                <th scope="col">Genre</th>
-                <th scope="col" class="text-right">IMBG</th>
+                <th scope="col" class="text-right">IMBD</th>
                 <th scope="col"></th>
                 <th scope="col" class="text-center"><i class="fa fa-search"></i></th>
             </tr>
@@ -48,10 +48,6 @@
             <c:forEach var="current" items="${toWatch}">
                 <tr>
                     <td><c:out value="${current.getMedia().getTitle()}"/></td>
-                    <td><fmt:formatDate value="${current.getMedia().getRelease()}"
-                                        pattern="MM.dd.yyyy"/>
-                    </td>
-                    <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td>
                         <c:forTokens var="tag" items="${current.getMedia().getMainGenre()}" delims="|">
                         <span class="badge badge-primary">
@@ -59,6 +55,10 @@
                         </span>
                         </c:forTokens>
                     </td>
+                    <td><fmt:formatDate value="${current.getMedia().getRelease()}"
+                                        pattern="MM.dd.yyyy"/>
+                    </td>
+                    <td class="text-right"><c:out value="${current.getMedia().getDuration()}"/>'</td>
                     <td class="text-right">
                         <c:out value="${current.getMedia().getRating()}"/>
                         <i class="fa fa-star"></i>
