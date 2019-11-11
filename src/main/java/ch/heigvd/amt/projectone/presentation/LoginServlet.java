@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
+import ch.heigvd.amt.projectone.model.entities.PasswordAuthentication;
 import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.UserDAOLocal;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
 public class LoginServlet extends BaseHttpServlet {
   private final static String[] postParamsToReturn = new String[]{"username"};
   private final static String[] postMandatoryParams = new String[]{"username", "password"};
+  private final static PasswordAuthentication passwordAuthentication = new PasswordAuthentication(5);
+
 
   @EJB
   UserDAOLocal userDAO;
@@ -32,7 +35,7 @@ public class LoginServlet extends BaseHttpServlet {
 
 
     User user = userDAO.findByUsername(username);
-    if (user == null || !user.getPassword().equals(password)) {
+    if (user == null || ! passwordAuthentication.authenticate(password.toCharArray(), user.getPassword())) {
       req.setAttribute("error", "Wrong username or password");
       resp.setStatus(401);
       responseToFailure(req, resp, postParamsToReturn, "/WEB-INF/pages/login.jsp");

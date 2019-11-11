@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.presentation;
 
+import ch.heigvd.amt.projectone.model.entities.PasswordAuthentication;
 import ch.heigvd.amt.projectone.model.entities.User;
 import ch.heigvd.amt.projectone.services.dao.UserDAOLocal;
 
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 public class RegistrationServlet extends BaseHttpServlet {
   private final static String[] postParamsToReturn = new String[]{"username", "email", "firstname", "lastname"};
   private final static String[] postMandatoryParams = new String[]{"username", "password", "password_confirm", "email", "firstname", "lastname"};
+  private final static PasswordAuthentication passwordAuthentication = new PasswordAuthentication(5);
 
   @EJB
   UserDAOLocal userDAO;
@@ -43,7 +45,7 @@ public class RegistrationServlet extends BaseHttpServlet {
             .email(req.getParameter("email"))
             .firstName(req.getParameter("firstname"))
             .lastName(req.getParameter("lastname"))
-            .password(password)
+            .password(passwordAuthentication.hash(password.toCharArray()))
             .memberSince(new Timestamp(System.currentTimeMillis()))
             .build();
 

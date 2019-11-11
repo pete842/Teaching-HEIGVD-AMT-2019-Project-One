@@ -11,21 +11,21 @@ insert into `users`
 values
 (
     "pete842",
-    "totem",
+    "$31$5$8f91zmgQBh7LUAM1-29me1KhHFQJekxK1872YYzNO2s",
     "Pierre",
     "Kohler",
     "pete842@mail.com"
 ),
 (
     "jzaehrin",
-    "totem",
+    "$31$5$8f91zmgQBh7LUAM1-29me1KhHFQJekxK1872YYzNO2s",
     "Jonathan",
     "Zaehringer",
     "jzaehrin@mail.com"
 ),
 (
     "capito27",
-    "totem",
+    "$31$5$8f91zmgQBh7LUAM1-29me1KhHFQJekxK1872YYzNO2s",
     "Filipe",
     "Fortunato",
     "capito27@mail.com"
