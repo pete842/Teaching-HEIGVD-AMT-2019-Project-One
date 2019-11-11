@@ -87,10 +87,10 @@ public class MediaUserServlet extends BaseHttpServlet {
             mediaUser = mediaUser.toBuilder().watched(watched).rating(rating).build();
 
             if(! mediaUserDAO.update(mediaUser)) {
-                req.setAttribute("error", "Impossible de mettre à jour cette élément");
+                req.setAttribute("error", "Impossible to update this element");
             }
         } else {
-            req.setAttribute("error", "Impossible de mettre à jour un élément inexistant");
+            req.setAttribute("error", "Impossible to update an undefined element");
         }
 
         req.setAttribute("success", "Successful update to Watched");
@@ -108,10 +108,10 @@ public class MediaUserServlet extends BaseHttpServlet {
 
         if (mediaUser != null) {
             if (!mediaUserDAO.delete(mediaUser)) {
-                req.setAttribute("error", "Impossible de supprimer cette élément");
+                req.setAttribute("error", "Impossible to update this element");
             }
         } else {
-            req.setAttribute("error", "Impossible de supprimer un élément inexistant");
+            req.setAttribute("error", "Impossible to update an undefined element");
         }
 
         req.setAttribute("success", "Successful delete");
