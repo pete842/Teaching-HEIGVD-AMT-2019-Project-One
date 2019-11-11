@@ -35,8 +35,9 @@ create table if not exists `media_user`
         `watched` timestamp null default null,
         primary key (`id`),
 		foreign key (`user_id`) references `users`(`id`),
-		foreign key (`media_id`) references `medias`(`id`)
-	);
+		foreign key (`media_id`) references `medias`(`id`),
+        constraint uq_association unique (`user_id`, `media_id`)
+);
 
 use `libmovie`;
 
@@ -79,35 +80,37 @@ DELIMITER //
 CREATE PROCEDURE insertMediaUser()
 BEGIN
     DECLARE counter INT default 0;
-    WHILE counter < 10000 DO
-        set counter = counter + 1;
-        insert into `media_user`
-        (
-            `user_id`,
-            `media_id`
-        )
-        values
-        (
-            1,
-            floor(rand()*(1000000-1+1))+1
-        );
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET counter = counter - 1;
+    BEGIN
+        WHILE counter < 10000 DO
+                set counter = counter + 1;
+                insert into `media_user`
+                (
+                    `user_id`,
+                    `media_id`
+                )
+                values
+                (
+                    1,
+                    floor(rand()*(1000000-1+1))+1
+                );
 
-        insert into `media_user`
-        (
-            `user_id`,
-            `media_id`,
-            `rating`,
-            `watched`
-        )
-        values
-        (
-            1,
-            floor(rand()*(1000000-1+1))+1,
-            floor(rand()*(100-1+1))+1,
-            now() - interval floor(rand() * 365) day 
-        );
-
-    END WHILE;
+                insert into `media_user`
+                (
+                    `user_id`,
+                    `media_id`,
+                    `rating`,
+                    `watched`
+                )
+                values
+                (
+                    1,
+                    floor(rand()*(1000000-1+1))+1,
+                    floor(rand()*(100-1+1))+1,
+                    now() - interval floor(rand() * 365) day
+                );
+            END WHILE;
+    END;
 END;
 //
 DELIMITER ;

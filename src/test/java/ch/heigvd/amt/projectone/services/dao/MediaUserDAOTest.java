@@ -156,29 +156,4 @@ public class MediaUserDAOTest {
 
         fail("Creation should have throw a SQLException.");
     }
-
-    @Test
-    public void PaginationShouldBeWellFormed() {
-        int count = mediaUserDAO.countAllToWatchByUser(1);
-
-        int pageSize = 100;
-        int pageNumber = 0;
-        int lastPage = (int) Math.ceil(count / pageSize) + 1;
-        int lastPageSize = count % pageSize;
-        if(lastPageSize == 0)
-            lastPageSize = pageSize;
-
-        assertEquals(0, mediaUserDAO.findAllToWatchByUserPaged(1, pageNumber, pageSize).size()); // page 0 should be empty
-
-        /*
-        for(++pageNumber; pageNumber < lastPage; ++pageNumber) // page 1 to lastPage - 1
-            assertEquals(pageSize, mediaUserDAO.findAllToWatchByUserPaged(1, pageNumber, pageSize).size());
-        */
-
-        // last page (partial)
-        assertEquals(lastPageSize, mediaUserDAO.findAllToWatchByUserPaged(1, lastPage, pageSize).size());
-
-        // after last page
-        assertEquals(0, mediaUserDAO.findAllToWatchByUserPaged(1, lastPage + 1, pageSize).size());
-    }
 }
