@@ -43,14 +43,14 @@ class LogoutServletTest {
 
     @Test
     void itShouldDestroyTheActiveSession() throws ServletException, IOException {
-        servlet.doDelete(request, response);
+        servlet.doGet(request, response);
 
         verify(httpSession, atLeastOnce()).invalidate();
     }
 
     @Test
     void itShouldRedirectToLogin() throws ServletException, IOException {
-        servlet.doDelete(request, response);
+        servlet.doGet(request, response);
 
         verify(requestDispatcher, atLeastOnce()).forward(request, response);
     }

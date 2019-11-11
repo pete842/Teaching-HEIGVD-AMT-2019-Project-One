@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/logout")
-public class LogoutServlet extends HttpServlet {
+public class LogoutServlet extends BaseHttpServlet {
+
   @Override
-  protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.getSession().invalidate();
+
     req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
   }
 }
