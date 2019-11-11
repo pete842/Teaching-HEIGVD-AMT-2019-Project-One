@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${Math.ceil(totalEntries / pageSize)}" parseLocale="en_US"/>
 
 <script type="text/javascript">
     let pageSize = '${pageSize}';

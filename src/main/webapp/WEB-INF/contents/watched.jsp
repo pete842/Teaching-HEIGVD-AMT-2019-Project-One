@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:parseNumber var="nbPages" integerOnly="true" type="number" value="${Math.ceil(totalEntriesWatched / pageSize)}" parseLocale="en_US"/>
 
 <div class="page-header page-header-small">
     <div class="page-header-image" data-parallax="true"
