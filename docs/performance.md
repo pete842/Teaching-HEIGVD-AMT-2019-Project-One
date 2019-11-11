@@ -26,10 +26,10 @@ Le premier test de charge que nous vous présentons représentes 50 utilisateurs
 
 Le graphique ci-dessous 
 
-![Response times over time (100pts)](assets/graphs/bif_session_1sec/reps_times_over_time_100pts.png)
+![Response times over time (100pts)](assets/graphs/big_session_1sec/reps_times_over_time_100pts.png)
 
 ## 20 threads
-![Response times over time (100pts)](assets/graphs/bif_session_1sec_20thr/reps_times_over_time_100pts.png)
+![Response times over time (100pts)](assets/graphs/big_session_1sec_20thr/reps_times_over_time_100pts.png)
 
 
 
