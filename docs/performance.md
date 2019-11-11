@@ -24,7 +24,7 @@ La raison à cela est que nous avons également effectué des tests disposant de
 
 Le premier test de charge que nous vous présentons représentes 50 utilisateurs fictifs, effectuant chancun 50 rondes décrites ci-dessus, tout en attandant un délai aléatoire de l'ordre de la seconde avant de passer à la ronde suivante.
 
-Le graphique ci-dessous représente les temps de réponses additionnés, par requête, sur toute la durée du test (limitation à 100pts pour plus de visibilité) :
+Le graphique ci-dessous représente les temps de réponses additionnés, par requête, moyennés par thread, sur toute la durée du test (limitation à 100pts pour plus de visibilité) :
 
 ![Response times over time (100pts)](assets/graphs/big_session_1sec/resp_times_over_time_100pts.png)
 
@@ -50,6 +50,15 @@ Voici le même premier graphique qu'au point précédant pour le test courant :
 
 ![Response times over time (100pts)](assets/graphs/big_session_1sec_20thr/resp_times_over_time_100pts.png)
 
+Comme nous pouvons l'observer, une nette amélioration des performances se profile, de l'ordre d'un facteur deux.
+
+## Remarque générale
+
+Si ces tests on été très intéressant à mettre en place, ils ne s'avèrent pas très intéressant à effectuer sur une machine de type laptop.
+Ceci pour la simple raison que les performances disponibles varient passablement sur la durée, et que le matériel n'est en aucun point optimiser pour ce genre de tâche.
+
+Il est donc difficile d'accorder beaucoup de légitimité aux tests de charge dans un tel contexte, même si, encore une fois, l'élaboration d'une stratégie permettant de représenter un certain cas d'utilisation d'une application est aussi important que ludique.
+Cela aide également à la compréhension des défis majeurs rencontrés par une telle application en production.
 
 
 [Retour](../README.md)
