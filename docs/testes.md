@@ -57,5 +57,18 @@ Il s'agit en effet d'un logiciel très (trop) puissant qui pourra être configur
 
 Le seul défaut majeur relatif à l'utilisation d'Arquillian résidera dans la lenteur du déploiement et d'exécution des tests.
 
+## Code coverage
+
+Nous avons utilisé `jacoco` pour avoir l'ensemble du code coverage en provenance des différents acteurs comme Arquillian.
+Le rapport de `code coverage` peut être vu dans le dossier target après avoir fait les testes avec code coverage dans `target/site/jacoco/index.html`.
+
+## Pagination
+
+Notre système permet de tester un affichage de l'ensemble des entrées de la base de données.
+Avec nos données de test de 1'000'000 de `Media`, il est clairement impossible de les afficher.
+Chrome consommait plus de 4Go de RAM avant l'arrêt forcés du test et WildFly en consommer un peu moins de 2Go ce qui est totalement inconcevable.
+
+C'est pour cette raison que les systèmes de pagination existent, il est nécessaire de le faire au plus proche des données pour éviter la mise en mémoire d'énorme ensemble de données qui ne seront dans la majorité pas utilisées.
+SQL permet de faire cette pagination au moment de la récupération des données pas l'instruction `LIMIT x` pour la taille suivie de `OFFSET x` pour l'emplacement de la fenêtre des données.
 
 [Retour](../README.md)
