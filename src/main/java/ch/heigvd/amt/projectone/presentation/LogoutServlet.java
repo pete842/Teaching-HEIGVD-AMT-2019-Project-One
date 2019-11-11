@@ -13,6 +13,7 @@ public class LogoutServlet extends BaseHttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.getSession().invalidate();
 
+    req.setAttribute("success", "Successful logout !");
     req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
   }
 }

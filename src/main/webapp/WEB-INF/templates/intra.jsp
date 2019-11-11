@@ -44,6 +44,12 @@
         </jsp:include>
     </c:if>
 
+    <c:if test="${success ne null and not empty success}">
+        <jsp:include page="/WEB-INF/components/success-toast.jsp">
+            <jsp:param name="success" value="${success}"/>
+        </jsp:include>
+    </c:if>
+
     <jsp:include page="/WEB-INF/contents/${param.content}.jsp"/>
 
     <jsp:include page="/WEB-INF/components/footer.jsp"/>

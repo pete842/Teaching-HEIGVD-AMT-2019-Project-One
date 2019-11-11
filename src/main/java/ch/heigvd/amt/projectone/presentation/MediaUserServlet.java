@@ -65,6 +65,8 @@ public class MediaUserServlet extends BaseHttpServlet {
             req.setAttribute("error", e.getMessage());
         }
 
+        req.setAttribute("success", "Successful add "
+                + ((req.getParameter("rating") != null && ! req.getParameter("watched").equals("")) ? "Watched" : "toWatch"));
         forwardBack(req, resp, "/home");
     }
 
@@ -91,12 +93,13 @@ public class MediaUserServlet extends BaseHttpServlet {
             req.setAttribute("error", "Impossible de mettre à jour un élément inexistant");
         }
 
+        req.setAttribute("success", "Successful update to Watched");
         forwardBack(req, resp, "/home");
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if( ! checkMandatoryParameters(req, resp, deleteMandatoryParams, "/home", deleteParamsToReturn)) return;
+        if (!checkMandatoryParameters(req, resp, deleteMandatoryParams, "/home", deleteParamsToReturn)) return;
 
         Integer userId = (Integer) req.getSession().getAttribute("user_id");
         Integer mediaId = Integer.parseInt(req.getParameter("media_id"));
@@ -104,14 +107,14 @@ public class MediaUserServlet extends BaseHttpServlet {
         MediaUser mediaUser = mediaUserDAO.get(userId, mediaId);
 
         if (mediaUser != null) {
-            if (! mediaUserDAO.delete(mediaUser)) {
+            if (!mediaUserDAO.delete(mediaUser)) {
                 req.setAttribute("error", "Impossible de supprimer cette élément");
             }
         } else {
             req.setAttribute("error", "Impossible de supprimer un élément inexistant");
         }
 
+        req.setAttribute("success", "Successful delete");
         forwardBack(req, resp, "/home");
-
     }
 }
