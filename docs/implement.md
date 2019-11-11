@@ -12,6 +12,17 @@ Le principe est que le servlet `forward` ensuite l'utilisation sur le servlet de
 
 Malheureusement, cette manière de faire n'est pas parfaite, car nous ne voulions par faire de `redirect` avec les informations d'erreurs ou de réussite dans l'URL.
 Cela implique donc que l'URL ne correspond pas à la réalité de la page, mais ce permet d'éviter une `URL` contenant un message d'erreur pouvant être forgé.
+Pour ce faire, il a fallu trouver un moyen de faire croire au servlet qu'une requête `POST` soit une requête `GET` lors du forward.
+Cette modification a été possible pas l'utilisation de la classe `HttpServletRequestWrapper` qui permet de `wrapper` la `request` en récrivant une méthode `getMethod` retournant "GET".
+
+```java
+new HttpServletRequestWrapper(req) {
+    @Override
+    public String getMethod() {
+        return "GET";
+    }
+}
+```
 
 Pour finir, l'ensemble des `servlet` hérite de `BaseHttpServlet` qui est une super classe contenant plusieurs fonctions simplifiant les actions comme la vérification des paramètres ou la redirection en cas d'erreur.
 
