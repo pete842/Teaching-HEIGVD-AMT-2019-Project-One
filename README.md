@@ -47,6 +47,9 @@ Rendez vous ensuite sur la page *Deployments* (http://localhost:9990/console/ind
 
 Une fois cela fait, il sera possible d'effectuer tous les tests décrits [ici](docs/testes.md).
 
+De plus, vous disposez du compte de test `pete842`, associé au mot de passe `totem`, qui permettra de bénéficier d'un compte disposant d'un contenu fictif.
+Ceci vous permettra notamment d'observer la pagination.
+
 ## Documentation
 
 - [Contexte](docs/context.md)
